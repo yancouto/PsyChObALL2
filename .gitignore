@@ -12,3 +12,6 @@
 *.cbp
 *.depend
 *.layout
+
+#Vim Stuff
+*.swp
