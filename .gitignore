@@ -1,3 +1,14 @@
+#General Build Stuff
 *.o
 *.exe
 *.out
+*.so
+*.dll
+
+#Sublime Stuff
+*.sublime-workspace
+
+#CodeBlocks Stuff
+*.cbp
+*.depend
+*.layout
