@@ -1,4 +1,0 @@
-#ifndef PSYCHOBALL2_MAIN_H_
-#define PSYCHOBALL2_MAIN_H_
-
-#endif //PSYCHOBALL2_MAIN_H_

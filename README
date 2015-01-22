@@ -2,3 +2,13 @@
 
 Sequel to the greatly acclamed 2013 hit PsyChObALL, PsyChObALL 2 will shake your perception of a game.
 Where did all the balls go? Why ain't I shooting people? How do I make tasty waffles? Yes. M1ND BL0WN.
+
+To compile the game, use (inside the src folder):
+$ make
+$ ./psy2
+(SFML-2.2 must be in the same folder as the project)
+
+To run the tests:
+$ make test
+$ ./test
+(gtest-1.7.0 must be in the same folder as the project)
