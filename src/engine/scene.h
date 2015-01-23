@@ -30,6 +30,9 @@ namespace psy {
 //   https://www.github.com/uspgamedev/ugdk/
 class Scene {
  public:
+  typedef std::function<void (const sf::RenderWindow &canvas)> RenderCallback;
+  typedef std::function<void (const psy::Scene &scene)> SceneCallback;
+
   Scene();
   virtual ~Scene();
 
@@ -40,18 +43,27 @@ class Scene {
   void Update(const sf::Time &dt);
 
   // Method called once it enters as active Scene.
-  virtual void Focus();
+  void Focus();
 
   // Method called once it leaves the top of the stack as active Scene.
-  virtual void DeFocus();
+  void DeFocus();
 
   // Finishes this Scene.
   void Finish();
 
   // Sets the current rendering function.
-  void set_render_function(
-          const std::function<void (const sf::RenderWindow &canvas)> &render) {
-    render_function_ = render;
+  void set_render_callback(const RenderCallback &render) {
+    render_callback_ = render;
+  }
+
+  // Sets the current focus callback function.
+  void set_focus_callback(const SceneCallback &focus) {
+    focus_callback_ = focus;
+  }
+
+  // Sets the current defocus callback function.
+  void set_defocus_callback(const SceneCallback &defocus) {
+    defocus_callback_ = defocus;
   }
 
   bool active() const { return active_; }
@@ -65,7 +77,10 @@ class Scene {
   bool finished_;
 
   // Rendering callback for drawing.
-  std::function<void (const sf::RenderWindow &canvas)> render_function_;
+  RenderCallback render_callback_;
+
+  // Functions called when Scene becomes active and unactive.
+  SceneCallback focus_callback_, defocus_callback_;
 
   // A list of tasks to be run by the Scene update method.
   std::forward_list<Task> tasks_;

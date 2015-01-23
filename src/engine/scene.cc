@@ -14,7 +14,7 @@ Scene::~Scene() {}
 
 // We need to see whether the Scene is actually running.
 void Scene::Render(const sf::RenderWindow &canvas) const {
-  if (active_ && !finished_) render_function_(canvas);
+  if (active_ && !finished_ && render_callback_) render_callback_(canvas);
 }
 
 // Checks whether the current task is to be destroyed next frame.
@@ -22,7 +22,7 @@ namespace {
 bool task_finished(Task &current_task) {
   return current_task.finished();
 }
-}
+}  // namespace
 
 // If the Scene is inactive or is set to finish, we do not update.
 void Scene::Update(const sf::Time &dt) {
@@ -36,10 +36,12 @@ void Scene::Update(const sf::Time &dt) {
 
 void Scene::Focus() {
   active_ = true;
+  if(focus_callback_) focus_callback_(*this);
 }
 
 void Scene::DeFocus() {
   active_ = false;
+  if(defocus_callback_) defocus_callback_(*this);
 }
 
 void Scene::Finish() {
