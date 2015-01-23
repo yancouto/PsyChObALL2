@@ -15,3 +15,9 @@
 
 #Vim Stuff
 *.swp
+
+#SFML Contents
+SFML-2.2/
+
+#Google Test Contents
+gtest-1.7.0/

@@ -1,6 +1,6 @@
 CC=g++
 # Assumes SFML folder is in the same directory as psycho's
-SFML_PATH=../../SFML-2.2
+SFML_PATH=../SFML-2.2
 CFLAGS=-I$(SFML_PATH)/include/ -c -Wall -std=gnu++0x
 LDFLAGS=-L$(SFML_PATH)/lib/ -lsfml-graphics -lsfml-window -lsfml-audio -lsfml-system -lm
 DEBUG = false
@@ -14,7 +14,7 @@ endif
 
 
 # Testing Stuff
-GTEST_PATH=../../gtest-1.7.0
+GTEST_PATH=../gtest-1.7.0
 GFLAGS=-I$(GTEST_PATH)/include $(CFLAGS)
 
 # If SystemRoot, Windows; Else *NIX.
