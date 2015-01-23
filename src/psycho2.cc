@@ -5,7 +5,7 @@
 namespace {
 /* Main game window */
 sf::RenderWindow *window = nullptr;
-} //namespace
+}  // namespace
 
 namespace psy {
 namespace system {
@@ -34,5 +34,5 @@ void Release() {
   if(window) delete window;
 }
 
-} //namespace system
-} //namespace psy
+}  // namespace system
+}  // namespace psy

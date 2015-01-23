@@ -1,5 +1,5 @@
-#ifndef PSYCHOBALL2_PSYCHO2_H_
-#define PSYCHOBALL2_PSYCHO2_H_
+#ifndef PSYCHO2_PSYCHO2_H_
+#define PSYCHO2_PSYCHO2_H_
 
 #include <SFML/Graphics.hpp>
 
@@ -15,7 +15,7 @@ void Run(void);
 /* Releases all data allocated in Init or during the game */
 void Release(void);
 
-} //namespace system
-} //namespace psy
+}  // namespace system
+}  // namespace psy
 
-#endif //PSYCHOBALL2_PSYCHO2_H_
+#endif // PSYCHO2_PSYCHO2_H_

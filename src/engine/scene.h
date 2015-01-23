@@ -4,16 +4,16 @@
 // @see Task
 //
 
-#ifndef PSY_ENGINE_SCENE_H_
-#define PSY_ENGINE_SCENE_H_
-
-#include "task.h"
+#ifndef PSYCHO2_ENGINE_SCENE_H_
+#define PSYCHO2_ENGINE_SCENE_H_
 
 #include <functional>
 #include <forward_list>
 
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
+
+#include "task.h"
 
 namespace psy {
 
@@ -34,10 +34,10 @@ class Scene {
   virtual ~Scene();
 
   // Method that draws objects into a sf::RenderWindow.
-  void Render(const sf::RenderWindow& canvas) const;
+  void Render(const sf::RenderWindow &canvas) const;
 
   // Method that updates all tasks from this Scene.
-  void Update(const sf::Time& dt);
+  void Update(const sf::Time &dt);
 
   // Method called once it enters as active Scene.
   virtual void Focus();
@@ -50,7 +50,7 @@ class Scene {
 
   // Sets the current rendering function.
   void set_render_function(
-          const std::function<void (const sf::RenderWindow& canvas)>& render) {
+          const std::function<void (const sf::RenderWindow &canvas)> &render) {
     render_function_ = render;
   }
 
@@ -65,12 +65,12 @@ class Scene {
   bool finished_;
 
   // Rendering callback for drawing.
-  std::function<void (const sf::RenderWindow& canvas)> render_function_;
+  std::function<void (const sf::RenderWindow &canvas)> render_function_;
 
   // A list of tasks to be run by the Scene update method.
   std::forward_list<Task> tasks_;
 };
 
-} // namespace psy
+}  // namespace psy
 
-#endif
+#endif  // PSYCHO2_ENGINE_SCENE_H_

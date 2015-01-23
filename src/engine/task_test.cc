@@ -3,10 +3,11 @@
 // @see Task
 //
 
-#include "engine/task.h"
 #include "gtest/gtest.h"
 
-//TODO(Renato): Work on more elaborate tests (which require private members).
+#include "task.h"
+
+// TODO(Renato): Work on more elaborate tests (which require private members).
 
 // Tests the reliability of finishing a Task.
 TEST(TaskTest, FinishValidity) {

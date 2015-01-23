@@ -5,10 +5,11 @@
 // @see Task
 //
 
-#include "engine/scene.h"
 #include "gtest/gtest.h"
 
-//TODO(Renato): Work on more elaborate tests (which require private members).
+#include "scene.h"
+
+// TODO(Renato): Work on more elaborate tests (which require private members).
 
 // Tests the reliability of focusing and defocusing a Scene.
 TEST(SceneTest, FocusValidity) {

@@ -1,5 +1,5 @@
-#ifndef PSY_ENGINE_TASK_
-#define PSY_ENGINE_TASK_
+#ifndef PSYCHO2_ENGINE_TASK_H_
+#define PSYCHO2_ENGINE_TASK_H_
 
 #include <functional>
 
@@ -13,14 +13,14 @@ class Task {
   // Warning: This should NOT be called.
   Task();
   // The higher the priority, the higher up on the stack.
-  explicit Task(const std::function<void (const sf::Time& dt)>& func);
+  explicit Task(const std::function<void (const sf::Time &dt)> &func);
   virtual ~Task();
 
   // Updates this task with an elapsed delta time (dt).
-  void Update(const sf::Time& dt);
+  void Update(const sf::Time &dt);
 
   // Overloades the function call operator for Task to work as a Functor.
-  void operator()(const sf::Time& dt) {
+  void operator()(const sf::Time &dt) {
     update_function_(dt);
   } 
 
@@ -28,10 +28,12 @@ class Task {
   void set_finished(bool finished) { finished_ = finished; }
 
  private:
-  std::function<void (const sf::Time& dt)> update_function_;
-  bool finished_; // Checks whether it is to be destroyed next frame.
+  std::function<void (const sf::Time &dt)> update_function_;
+  
+  // Checks whether it is to be destroyed next frame.
+  bool finished_;
 };
 
-} // namespace psy
+}  // namespace psy
 
-#endif
+#endif  // PSYCHO2_ENGINE_TASK_H_

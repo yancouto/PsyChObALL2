@@ -1,7 +1,7 @@
 CC=g++
 # Assumes SFML folder is in the same directory as psycho's
 SFML_PATH=../SFML-2.2
-CFLAGS=-I$(SFML_PATH)/include/ -c -Wall -std=c++11
+CFLAGS=-I$(SFML_PATH)/include/ -c -Wall -std=gnu++11
 LDFLAGS=-L$(SFML_PATH)/lib/ -lsfml-graphics -lsfml-window -lsfml-audio -lsfml-system -lm
 DEBUG = false
 
@@ -16,6 +16,7 @@ endif
 # Testing Stuff
 GTEST_PATH=../gtest-1.7.0
 GFLAGS=-I$(GTEST_PATH)/include $(CFLAGS)
+GLDFLAGS=-L$(GTEST_PATH)/lib $(LDFLAGS) -lgtest
 
 # If SystemRoot, Windows; Else *NIX.
 ifdef SystemRoot
@@ -24,6 +25,7 @@ ifdef SystemRoot
 else
   # This means we're dealing with a *NIX system.
   CLEAN = rm *.o psy2 test
+  GLDFLAGS += -pthread
 endif
 
 # All non-test files (except main)
@@ -50,7 +52,7 @@ psy2: $(DEPS) main.o
 	$(CC) $^ -o $@ $(LDFLAGS)
 
 test: $(DEPS) $(TESTS) gtest_main.o
-	$(CC) $^ -o $@ -I$(GTEST_PATH)/include -L$(GTEST_PATH)/lib $(LDFLAGS) -lgtest -pthread
+	$(CC) $^ -o $@ $(GLDFLAGS)
 
 gtest_main.o:
 	$(CC) $(GTEST_PATH)/src/gtest_main.cc -c -std=gnu++0x -O2 -I$(GTEST_PATH)/include
@@ -64,19 +66,19 @@ psycho2.o: psycho2.cc psycho2.h
 psycho2_test.o: psycho2_test.cc psycho2.h
 	$(CC) $< $(GFLAGS)
 
-scene_test.o: scene_test.cc engine/scene.h
-	$(CC) $< $(GFLAGS)
-
-task_test.o: task_test.cc engine/task.h
-	$(CC) $< $(GFLAGS)
-
 # Engine related compilations. //
 
-scene.o: engine/scene.h
+scene.o: engine/scene.cc engine/scene.h
 	$(CC) engine/scene.cc $(CFLAGS)
 
-task.o: engine/task.h
+scene_test.o: engine/scene_test.cc engine/scene.h
+	$(CC) $< $(GFLAGS)
+
+task.o: engine/task.cc engine/task.h
 	$(CC) engine/task.cc $(CFLAGS)
+
+task_test.o: engine/task_test.cc engine/task.h
+	$(CC) $< $(GFLAGS)
 
 # // Engine related compilations.
 
