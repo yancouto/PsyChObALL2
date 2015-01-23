@@ -1,7 +1,7 @@
 CC=g++
 # Assumes SFML folder is in the same directory as psycho's
 SFML_PATH=../SFML-2.2
-CFLAGS=-I$(SFML_PATH)/include/ -c -Wall -std=gnu++0x
+CFLAGS=-I$(SFML_PATH)/include/ -c -Wall -std=c++11
 LDFLAGS=-L$(SFML_PATH)/lib/ -lsfml-graphics -lsfml-window -lsfml-audio -lsfml-system -lm
 DEBUG = false
 
@@ -19,19 +19,19 @@ GFLAGS=-I$(GTEST_PATH)/include $(CFLAGS)
 
 # If SystemRoot, Windows; Else *NIX.
 ifdef SystemRoot
-  # This means we're dealiing with Windows.
+  # This means we're dealing with Windows.
   CLEAN = del *.o *.exe
 else
   # This means we're dealing with a *NIX system.
-  CLEAN = rm *.o psy2
+  CLEAN = rm *.o psy2 test
 endif
 
 # All non-test files (except main)
-DEPS=psycho2.o
+DEPS=psycho2.o scene.o task.o
 # Tests
-TESTS=psycho2_test.o
+TESTS=psycho2_test.o scene_test.o task_test.o
 
-# Adding a file isntructions:
+# Adding a file instructions:
 # When you add a file, be sure to add its .o to DEPS
 # And make its .o target, that probably looks like this:
 #   file.o: file.cc file.h (other dependencies)
@@ -50,7 +50,7 @@ psy2: $(DEPS) main.o
 	$(CC) $^ -o $@ $(LDFLAGS)
 
 test: $(DEPS) $(TESTS) gtest_main.o
-	$(CC) $^ -o $@ -I$(GTEST_PATH)/include -L$(GTEST_PATH)/lib $(LDFLAGS) -lgtest
+	$(CC) $^ -o $@ -I$(GTEST_PATH)/include -L$(GTEST_PATH)/lib $(LDFLAGS) -lgtest -pthread
 
 gtest_main.o:
 	$(CC) $(GTEST_PATH)/src/gtest_main.cc -c -std=gnu++0x -O2 -I$(GTEST_PATH)/include
@@ -64,5 +64,22 @@ psycho2.o: psycho2.cc psycho2.h
 psycho2_test.o: psycho2_test.cc psycho2.h
 	$(CC) $< $(GFLAGS)
 
+scene_test.o: scene_test.cc engine/scene.h
+	$(CC) $< $(GFLAGS)
+
+task_test.o: task_test.cc engine/task.h
+	$(CC) $< $(GFLAGS)
+
+# Engine related compilations. //
+
+scene.o: engine/scene.h
+	$(CC) engine/scene.cc $(CFLAGS)
+
+task.o: engine/task.h
+	$(CC) engine/task.cc $(CFLAGS)
+
+# // Engine related compilations.
+
+.PHONY: clean
 clean:
 	$(CLEAN)

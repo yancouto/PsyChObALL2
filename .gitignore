@@ -21,3 +21,11 @@ SFML-2.2/
 
 #Google Test Contents
 gtest-1.7.0/
+
+#Binary executables
+bin/
+src/psy2
+src/test
+
+# GCC pre-compiled headers
+*.gch
