@@ -13,7 +13,7 @@ Scene::Scene() : active_(false), finished_(false) {}
 Scene::~Scene() {}
 
 // We need to see whether the Scene is actually running.
-void Scene::Render(const sf::RenderWindow &canvas) const {
+void Scene::Render(sf::RenderWindow &canvas) const {
   if (active_ && !finished_ && render_callback_) render_callback_(canvas);
 }
 

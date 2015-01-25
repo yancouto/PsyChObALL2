@@ -30,14 +30,14 @@ namespace psy {
 //   https://www.github.com/uspgamedev/ugdk/
 class Scene {
  public:
-  typedef std::function<void (const sf::RenderWindow &canvas)> RenderCallback;
+  typedef std::function<void (sf::RenderWindow &canvas)> RenderCallback;
   typedef std::function<void (const psy::Scene &scene)> SceneCallback;
 
   Scene();
   virtual ~Scene();
 
   // Method that draws objects into a sf::RenderWindow.
-  void Render(const sf::RenderWindow &canvas) const;
+  void Render(sf::RenderWindow &canvas) const;
 
   // Method that updates all tasks from this Scene.
   void Update(const sf::Time &dt);
@@ -50,6 +50,11 @@ class Scene {
 
   // Finishes this Scene.
   void Finish();
+
+  // Adds a task to the Scene.
+  void AddTask(const Task &task) {
+    tasks_.push_front(task);
+  }
 
   // Sets the current rendering function.
   void set_render_callback(const RenderCallback &render) {
