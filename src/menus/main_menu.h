@@ -6,12 +6,13 @@
 
 #include <forward_list>
 
-#include <engine/scene.h>
-
 #include <SFML/Graphics.hpp>
+
+#include <engine/scene.h>
 
 namespace psy {
 
+// TODO: Change this to a namespace or something like that
 // This is the class that handles the scene and drawable elements inside the
 // main menu.
 class MainMenu {
