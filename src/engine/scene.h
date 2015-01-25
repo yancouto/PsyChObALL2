@@ -1,8 +1,5 @@
-//
 // This module has everything regarding Scene directly. 
-// 
 // @see Task
-//
 
 #ifndef PSYCHO2_ENGINE_SCENE_H_
 #define PSYCHO2_ENGINE_SCENE_H_

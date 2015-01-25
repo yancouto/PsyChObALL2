@@ -29,9 +29,9 @@ else
 endif
 
 # All non-test files (except main)
-DEPS=psycho2.o scene.o task.o
+DEPS=psycho2.o scene.o task.o main_menu.o
 # Tests
-TESTS=psycho2_test.o scene_test.o task_test.o
+TESTS=psycho2_test.o scene_test.o task_test.o main_menu_test.o
 
 # Adding a file instructions:
 # When you add a file, be sure to add its .o to DEPS
@@ -57,6 +57,8 @@ test: $(DEPS) $(TESTS) gtest_main.o
 gtest_main.o:
 	$(CC) $(GTEST_PATH)/src/gtest_main.cc -c -std=gnu++0x -O2 -I$(GTEST_PATH)/include
 
+# Root related compilations. //
+
 main.o: main.cc
 	$(CC) $< $(CFLAGS)
 
@@ -66,21 +68,31 @@ psycho2.o: psycho2.cc psycho2.h
 psycho2_test.o: psycho2_test.cc psycho2.h
 	$(CC) $< $(GFLAGS)
 
+# // Root related compilations.
 # Engine related compilations. //
 
 scene.o: engine/scene.cc engine/scene.h
-	$(CC) engine/scene.cc $(CFLAGS)
+	$(CC) $< $(CFLAGS)
 
 scene_test.o: engine/scene_test.cc engine/scene.h
 	$(CC) $< $(GFLAGS)
 
 task.o: engine/task.cc engine/task.h
-	$(CC) engine/task.cc $(CFLAGS)
+	$(CC) $< $(CFLAGS)
 
 task_test.o: engine/task_test.cc engine/task.h
 	$(CC) $< $(GFLAGS)
 
 # // Engine related compilations.
+# Menu related compilations. //
+
+main_menu.o: menus/main_menu.cc menus/main_menu.h
+	$(CC) $< $(CFLAGS)
+
+main_menu_test.o: menus/main_menu_test.cc menus/main_menu.h
+	$(CC) $< $(GFLAGS)
+
+# // Menu related compilations.
 
 .PHONY: clean
 clean:
