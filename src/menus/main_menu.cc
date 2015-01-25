@@ -44,4 +44,4 @@ MainMenu::MainMenu() : shape_(100.f) {
 
 MainMenu::~MainMenu() {}
 
-}  //namespace psy;
+}  //namespace psy

@@ -2,7 +2,7 @@
 // @see Scene
 
 #ifndef PSYCHO2_MENU_MAIN_MENU_H_
-#define PSYCHO2_MENU_MAIN_MENU_H 
+#define PSYCHO2_MENU_MAIN_MENU_H_ 
 
 #include <forward_list>
 
