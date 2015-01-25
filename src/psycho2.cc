@@ -1,4 +1,4 @@
-#include "psycho2.h"
+#include <psycho2.h>
 
 #include <cstdio>
 
@@ -6,7 +6,7 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 
-#include "engine/scene.h"
+#include <engine/scene.h>
 
 namespace {
 // Main game window.

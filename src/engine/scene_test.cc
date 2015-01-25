@@ -7,7 +7,7 @@
 
 #include "gtest/gtest.h"
 
-#include "scene.h"
+#include <engine/scene.h>
 
 // TODO(Renato): Work on more elaborate tests (which require private members).
 

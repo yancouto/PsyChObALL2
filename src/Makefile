@@ -1,7 +1,7 @@
 CC=g++
 # Assumes SFML folder is in the same directory as psycho's
 SFML_PATH=../SFML-2.2
-CFLAGS=-I$(SFML_PATH)/include/ -c -Wall -std=gnu++11
+CFLAGS=-I$(SFML_PATH)/include/ -I. -c -Wall -std=gnu++11
 LDFLAGS=-L$(SFML_PATH)/lib/ -lsfml-graphics -lsfml-window -lsfml-audio -lsfml-system -lm
 DEBUG = false
 

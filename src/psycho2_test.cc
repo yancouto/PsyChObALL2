@@ -1,4 +1,4 @@
-#include "psycho2.h"
+#include <psycho2.h>
 
 #include "gtest/gtest.h"
 

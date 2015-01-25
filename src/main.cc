@@ -1,4 +1,4 @@
-#include "psycho2.h"
+#include <psycho2.h>
 
 int main() {
   psy::system::Init();
