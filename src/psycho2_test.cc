@@ -12,6 +12,7 @@ TEST(PsychoTest, NoReleaseCrash) {
 }
 
 TEST(PsychoTest, FocusCalled) {
+  // Focus callback should be called when entering a Scene
   std::shared_ptr<psy::Scene> s(new psy::Scene);
   bool called_focus = false;
   s->set_focus_callback([&called_focus](psy::Scene &self) {
@@ -25,6 +26,7 @@ TEST(PsychoTest, FocusCalled) {
 }
 
 TEST(PsychoTest, ChangingScenesOnFocus) {
+  // Changing a Scene on its focus callback should cause no problems
   std::shared_ptr<psy::Scene> a(new psy::Scene), b(new psy::Scene);
   bool called_focus_a, called_defocus_a, called_focus_b, called_defocus_b;
   called_focus_a = called_defocus_a = called_focus_b = called_defocus_b = false;
@@ -48,6 +50,7 @@ TEST(PsychoTest, ChangingScenesOnFocus) {
 }
 
 TEST(PsychoTest, NoScene) {
+  // Running the game without a Scene should not crash, just close immediately
   psy::system::Init();
   EXPECT_EXIT({
     psy::system::Run();

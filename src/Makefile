@@ -59,7 +59,7 @@ gtest_main.o:
 
 # Root related compilations. //
 
-main.o: main.cc psycho2.h engine/scene.h
+main.o: main.cc psycho2.h menus/main_menu.h
 	$(CC) $< $(CFLAGS)
 
 psycho2.o: psycho2.cc psycho2.h
@@ -86,7 +86,7 @@ task_test.o: engine/task_test.cc task.o
 # // Engine related compilations.
 # Menu related compilations. //
 
-main_menu.o: menus/main_menu.cc menus/main_menu.h
+main_menu.o: menus/main_menu.cc menus/main_menu.h engine/task.h engine/scene.h
 	$(CC) $< $(CFLAGS)
 
 main_menu_test.o: menus/main_menu_test.cc main_menu.o

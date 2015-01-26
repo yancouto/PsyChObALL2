@@ -5,7 +5,8 @@
 
 #include <menus/main_menu.cc>
 
-TEST(MainMenuTest, FpsCounterInit) {
-  psy::MainMenu target_menu;
-  EXPECT_EQ(target_menu.fps_counter(), 1);
+TEST(MainMenuTest, SceneNonNull) {
+  EXPECT_NE(psy::MainMenuScene(), nullptr);
 }
+
+// TODO: Better Tests

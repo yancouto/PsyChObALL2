@@ -1,47 +1,63 @@
 #include <menus/main_menu.h>
 
-namespace psy {
+#include <SFML/Graphics.hpp>
 
-MainMenu::MainMenu() : shape_(100.f) {
+#include <engine/task.h>
+
+namespace {
+std::shared_ptr<psy::Scene> menu = nullptr;
+sf::CircleShape *cs = nullptr;
+
+void CreateMenu() {
+  psy::Scene *m = new psy::Scene;  // New menu
+  cs = new sf::CircleShape(100.f);
+
   // Sets up and adds to the scene a dummy task for testing.
-  Task hello_world([this](const sf::Time &dt) {
-                      // Every second we print out the FPS.
-                      if (fps_counter_ < 1000) {
-                        fps_counter_ += dt.asMilliseconds();
-                        return;
-                      }
-                      fps_counter_ = dt.asMilliseconds();
-                      printf("dt = %f\n", 1.0f/dt.asSeconds());
-                    });
-  scene_.AddTask(hello_world);
+  psy::Task hello_world([](const sf::Time &dt) {
+    // Every second we print out the FPS.
+    printf("dt = %f\n", 1.0f/dt.asSeconds());
+  });
+  m->AddTask(hello_world);
+
   // Sets up a Render callback for Scene to render.
-  shape_.setPosition(400, 300);           
-  shape_.setFillColor(sf::Color::Green);   
-  scene_.set_render_callback([this](sf::RenderWindow &canvas) {
-                      canvas.draw(shape_);
-                    });
+  cs->setPosition(400, 300);           
+  cs->setFillColor(sf::Color::Green);   
+  m->set_render_callback([=](sf::RenderWindow &canvas) {
+    canvas.draw(*cs);
+  });
   // Adds a Task for basic WASD movement.
-  Task move_task([this](const sf::Time &dt) {
-                      if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
-                        shape_.move(0, -2);
-                      if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
-                        shape_.move(-2, 0);
-                      if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
-                        shape_.move(0, 2);
-                      if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
-                        shape_.move(2, 0);
-                    });
-  scene_.AddTask(move_task);
+  psy::Task move_task([=](const sf::Time &dt) {
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+      cs->move(0, -.2);
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+      cs->move(-.2, 0);
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+      cs->move(0, .2);
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+      cs->move(.2, 0);
+  });
+  m->AddTask(move_task);
+
   // Sets up the Focus callback. When the scene is to become active.
-  scene_.set_focus_callback([](psy::Scene &self) {
-                      puts("Scene has gained focus.");
-                    });
+  m->set_focus_callback([](psy::Scene &self) {
+    puts("Scene has gained focus.");
+  });
+
   // Sets up the DeFocus callback. When the scene is to become inactive.
-  scene_.set_defocus_callback([](psy::Scene &self) {
-                      puts("Scene has lost focus.");
-                    }); 
+  m->set_defocus_callback([](psy::Scene &self) {
+    puts("Scene has lost focus.");
+  }); 
+
+  menu.reset(m);
 }
 
-MainMenu::~MainMenu() {}
+}  // unnamed namespace
+
+namespace psy {
+
+std::shared_ptr<psy::Scene> MainMenuScene() {
+  if (!menu) CreateMenu();
+  return menu;
+}
 
 }  //namespace psy

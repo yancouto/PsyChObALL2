@@ -1,12 +1,12 @@
 #include <psycho2.h>
 
+#include <cassert>
 #include <cstdio>
 
 #include <SFML/System.hpp>
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 
-#include <engine/scene.h>
 #include <menus/main_menu.h>
 
 namespace {
@@ -68,7 +68,7 @@ void Run() {
 void Release() {}
 
 void ChangeTo(std::shared_ptr<psy::Scene> scene) {
-  if (next_scene) printf("Too much Scene-changing.\n");
+  assert(!next_scene);  // Too much Scene changing!
   next_scene = scene;
 }
 
