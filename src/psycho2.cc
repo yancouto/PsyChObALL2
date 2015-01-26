@@ -18,8 +18,9 @@ std::shared_ptr<psy::Scene> current_scene (nullptr), next_scene (nullptr);
 // Manages Focus and Defocus and changes scenes
 void DoSceneChange() {
   if (current_scene) current_scene->DeFocus();
-  (current_scene = next_scene)->Focus();  // Changes Scenes and Focuses
+  current_scene = next_scene;
   next_scene = nullptr;
+  current_scene->Focus();
 }
 
 }  // namespace
@@ -56,6 +57,8 @@ void Run() {
     window->display();
 
     if (next_scene) DoSceneChange();
+    if (current_scene && current_scene->finished()) break;
+    if (!current_scene) break;
   }
   
   // Finishes the scene.

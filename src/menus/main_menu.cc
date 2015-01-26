@@ -33,11 +33,11 @@ MainMenu::MainMenu() : shape_(100.f) {
                     });
   scene_.AddTask(move_task);
   // Sets up the Focus callback. When the scene is to become active.
-  scene_.set_focus_callback([](const psy::Scene &scene) {
+  scene_.set_focus_callback([](psy::Scene &self) {
                       puts("Scene has gained focus.");
                     });
   // Sets up the DeFocus callback. When the scene is to become inactive.
-  scene_.set_defocus_callback([](const psy::Scene &scene) {
+  scene_.set_defocus_callback([](psy::Scene &self) {
                       puts("Scene has lost focus.");
                     }); 
 }

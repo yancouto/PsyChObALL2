@@ -1,10 +1,11 @@
 #include <engine/scene.h>
-#include <engine/task.h>
 
 #include <algorithm>
 
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
+
+#include <engine/task.h>
 
 namespace psy {
 

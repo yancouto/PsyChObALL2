@@ -3,7 +3,7 @@
 
 #include "gtest/gtest.h"
 
-#include <menus/main_menu.h>
+#include <menus/main_menu.cc>
 
 TEST(MainMenuTest, FpsCounterInit) {
   psy::MainMenu target_menu;

@@ -28,7 +28,7 @@ namespace psy {
 class Scene {
  public:
   typedef std::function<void (sf::RenderWindow &canvas)> RenderCallback;
-  typedef std::function<void (const psy::Scene &scene)> SceneCallback;
+  typedef std::function<void (psy::Scene &self)> SceneCallback;
 
   Scene();
   virtual ~Scene();

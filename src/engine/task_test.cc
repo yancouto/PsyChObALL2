@@ -5,7 +5,7 @@
 
 #include "gtest/gtest.h"
 
-#include <engine/task.h>
+#include <engine/task.cc>
 
 // TODO(Renato): Work on more elaborate tests (which require private members).
 

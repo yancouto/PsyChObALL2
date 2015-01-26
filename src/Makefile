@@ -39,7 +39,7 @@ TESTS=psycho2_test.o scene_test.o task_test.o main_menu_test.o
 #   file.o: file.cc file.h (other dependencies)
 #     $(CC) $< $(CFLAGS)
 # And its test .o to TESTS, and the target should look like this:
-#   file_test.o: file_test.cc file.h (file.h dependencies)
+#   file_test.o: file_test.cc file.o
 #     $(CC) $< $(GFLAGS)
 # That's it! :D
 # Is this the best way to do this? Probably not.
@@ -51,7 +51,7 @@ all: psy2
 psy2: $(DEPS) main.o
 	$(CC) $^ -o $@ $(LDFLAGS)
 
-test: $(DEPS) $(TESTS) gtest_main.o
+test: $(TESTS) gtest_main.o
 	$(CC) $^ -o $@ $(GLDFLAGS)
 
 gtest_main.o:
@@ -59,28 +59,28 @@ gtest_main.o:
 
 # Root related compilations. //
 
-main.o: main.cc
+main.o: main.cc psycho2.h engine/scene.h
 	$(CC) $< $(CFLAGS)
 
 psycho2.o: psycho2.cc psycho2.h
 	$(CC) $< $(CFLAGS)
 
-psycho2_test.o: psycho2_test.cc psycho2.h
+psycho2_test.o: psycho2_test.cc psycho2.o
 	$(CC) $< $(GFLAGS)
 
 # // Root related compilations.
 # Engine related compilations. //
 
-scene.o: engine/scene.cc engine/scene.h
+scene.o: engine/scene.cc engine/scene.h engine/task.h
 	$(CC) $< $(CFLAGS)
 
-scene_test.o: engine/scene_test.cc engine/scene.h
+scene_test.o: engine/scene_test.cc scene.o
 	$(CC) $< $(GFLAGS)
 
 task.o: engine/task.cc engine/task.h
 	$(CC) $< $(CFLAGS)
 
-task_test.o: engine/task_test.cc engine/task.h
+task_test.o: engine/task_test.cc task.o
 	$(CC) $< $(GFLAGS)
 
 # // Engine related compilations.
@@ -89,7 +89,7 @@ task_test.o: engine/task_test.cc engine/task.h
 main_menu.o: menus/main_menu.cc menus/main_menu.h
 	$(CC) $< $(CFLAGS)
 
-main_menu_test.o: menus/main_menu_test.cc menus/main_menu.h
+main_menu_test.o: menus/main_menu_test.cc main_menu.o
 	$(CC) $< $(GFLAGS)
 
 # // Menu related compilations.
