@@ -65,7 +65,7 @@ main.o: main.cc system/psycho2.h menu/main_menu.h
 psycho2.o: system/psycho2.cc system/psycho2.h
 	$(CC) $< $(CFLAGS)
 
-psycho2_test.o: system/psycho2_test.cc system/psycho2.o
+psycho2_test.o: system/psycho2_test.cc psycho2.o
 	$(CC) $< $(GFLAGS)
 
 # // Root related compilations.

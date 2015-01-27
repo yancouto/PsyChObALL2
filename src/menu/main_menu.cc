@@ -9,12 +9,12 @@ namespace menu {
 namespace {
 
 std::shared_ptr<psy::engine::Scene> menu = nullptr;
-sf::CircleShape *cs = nullptr;
+sf::CircleShape *circle_shape = nullptr;
 int fps_counter = 1;
 
 void CreateMenu() {
   psy::engine::Scene *m = new psy::engine::Scene;  // New menu
-  cs = new sf::CircleShape(100.f);
+  circle_shape = new sf::CircleShape(100.f);
 
   // Sets up and adds to the scene a dummy task for testing.
   psy::engine::Task hello_world([](const sf::Time &dt) {
@@ -29,21 +29,21 @@ void CreateMenu() {
   m->AddTask(hello_world);
 
   // Sets up a Render callback for Scene to render.
-  cs->setPosition(400, 300);           
-  cs->setFillColor(sf::Color::Green);   
+  circle_shape->setPosition(400, 300);           
+  circle_shape->setFillColor(sf::Color::Green);   
   m->set_render_callback([=](sf::RenderWindow &canvas) {
-    canvas.draw(*cs);
+    canvas.draw(*circle_shape);
   });
   // Adds a Task for basic WASD movement.
   psy::engine::Task move_task([=](const sf::Time &dt) {
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
-      cs->move(0, -.2);
+      circle_shape->move(0, -.2);
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
-      cs->move(-.2, 0);
+      circle_shape->move(-.2, 0);
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
-      cs->move(0, .2);
+      circle_shape->move(0, .2);
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
-      cs->move(.2, 0);
+      circle_shape->move(.2, 0);
   });
   m->AddTask(move_task);
 
