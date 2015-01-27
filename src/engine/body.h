@@ -13,7 +13,9 @@ class Body : public sf::Drawable {
   explicit Body(const sf::Vector2f &position);
   virtual ~Body();
 
-  virtual void draw(sf::RenderTarget &target, sf::RenderStates states) = 0;
+  virtual void draw(
+    sf::RenderTarget &target, 
+    sf::RenderStates states) const = 0;
 
   sf::Transformable& transform() { return transform_; }
 

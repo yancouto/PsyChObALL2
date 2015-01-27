@@ -29,7 +29,7 @@ else
 endif
 
 # All non-test files (except main)
-DEPS=psycho2.o scene.o task.o main_menu.o body.o
+DEPS=psycho2.o scene.o task.o main_menu.o body.o player.o
 # Tests
 TESTS=psycho2_test.o scene_test.o task_test.o main_menu_test.o
 
@@ -62,13 +62,16 @@ gtest_main.o:
 main.o: main.cc system/psycho2.h menu/main_menu.h
 	$(CC) $< $(CFLAGS)
 
+# // Root related compilations.
+# System related compilations. //
+
 psycho2.o: system/psycho2.cc system/psycho2.h
 	$(CC) $< $(CFLAGS)
 
 psycho2_test.o: system/psycho2_test.cc psycho2.o
 	$(CC) $< $(GFLAGS)
 
-# // Root related compilations.
+# // System related compilations.
 # Engine related compilations. //
 
 scene.o: engine/scene.cc engine/scene.h engine/task.h
@@ -96,6 +99,12 @@ main_menu_test.o: menu/main_menu_test.cc main_menu.o
 	$(CC) $< $(GFLAGS)
 
 # // Menu related compilations.
+# Entities related compilations.
+
+player.o: entities/player.cc entities/player.h engine/body.h
+	$(CC) $< $(CFLAGS)
+
+# // Entities related compilations.
 
 .PHONY: clean
 clean:

@@ -6,6 +6,7 @@
 #include <SFML/Graphics.hpp>
 
 #include <engine/scene.h>
+#include <entities/player.h>
 
 namespace psy {
 namespace system {

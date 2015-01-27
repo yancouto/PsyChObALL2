@@ -8,6 +8,7 @@
 #include <SFML/Window.hpp>
 
 #include <engine/scene.h>
+#include <entities/player.h>
 
 namespace {
 // Main game window.
