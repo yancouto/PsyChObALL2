@@ -1,20 +1,29 @@
-#include <menus/main_menu.h>
+#include <menu/main_menu.h>
 
 #include <SFML/Graphics.hpp>
 
 #include <engine/task.h>
 
+namespace psy {
+namespace menu {
 namespace {
-std::shared_ptr<psy::Scene> menu = nullptr;
+
+std::shared_ptr<psy::engine::Scene> menu = nullptr;
 sf::CircleShape *cs = nullptr;
+int fps_counter = 1;
 
 void CreateMenu() {
-  psy::Scene *m = new psy::Scene;  // New menu
+  psy::engine::Scene *m = new psy::engine::Scene;  // New menu
   cs = new sf::CircleShape(100.f);
 
   // Sets up and adds to the scene a dummy task for testing.
-  psy::Task hello_world([](const sf::Time &dt) {
+  psy::engine::Task hello_world([](const sf::Time &dt) {
     // Every second we print out the FPS.
+    if (fps_counter < 1000) {
+      fps_counter += dt.asMilliseconds();
+      return;
+    }
+    fps_counter = dt.asMilliseconds();
     printf("dt = %f\n", 1.0f/dt.asSeconds());
   });
   m->AddTask(hello_world);
@@ -26,7 +35,7 @@ void CreateMenu() {
     canvas.draw(*cs);
   });
   // Adds a Task for basic WASD movement.
-  psy::Task move_task([=](const sf::Time &dt) {
+  psy::engine::Task move_task([=](const sf::Time &dt) {
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
       cs->move(0, -.2);
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
@@ -39,12 +48,12 @@ void CreateMenu() {
   m->AddTask(move_task);
 
   // Sets up the Focus callback. When the scene is to become active.
-  m->set_focus_callback([](psy::Scene &self) {
+  m->set_focus_callback([](psy::engine::Scene &self) {
     puts("Scene has gained focus.");
   });
 
   // Sets up the DeFocus callback. When the scene is to become inactive.
-  m->set_defocus_callback([](psy::Scene &self) {
+  m->set_defocus_callback([](psy::engine::Scene &self) {
     puts("Scene has lost focus.");
   }); 
 
@@ -53,11 +62,10 @@ void CreateMenu() {
 
 }  // unnamed namespace
 
-namespace psy {
-
-std::shared_ptr<psy::Scene> MainMenuScene() {
+std::shared_ptr<psy::engine::Scene> MainMenuScene() {
   if (!menu) CreateMenu();
   return menu;
 }
 
-}  //namespace psy
+}  // namespace menu
+}  // namespace psy

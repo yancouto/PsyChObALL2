@@ -1,4 +1,4 @@
-#include <psycho2.cc>
+#include <system/psycho2.cc>
 
 #include <memory>
 
@@ -13,9 +13,9 @@ TEST(PsychoTest, NoReleaseCrash) {
 
 TEST(PsychoTest, FocusCalled) {
   // Focus callback should be called when entering a Scene
-  std::shared_ptr<psy::Scene> s(new psy::Scene);
+  std::shared_ptr<psy::engine::Scene> s(new psy::engine::Scene);
   bool called_focus = false;
-  s->set_focus_callback([&called_focus](psy::Scene &self) {
+  s->set_focus_callback([&called_focus](psy::engine::Scene &self) {
     self.Finish();
     called_focus = true;
   });
@@ -27,19 +27,19 @@ TEST(PsychoTest, FocusCalled) {
 
 TEST(PsychoTest, ChangingScenesOnFocus) {
   // Changing a Scene on its focus callback should cause no problems
-  std::shared_ptr<psy::Scene> a(new psy::Scene), b(new psy::Scene);
+  std::shared_ptr<psy::engine::Scene> a(new psy::engine::Scene), b(new psy::engine::Scene);
   bool called_focus_a, called_defocus_a, called_focus_b, called_defocus_b;
   called_focus_a = called_defocus_a = called_focus_b = called_defocus_b = false;
-  a->set_focus_callback([&called_focus_a, &b](psy::Scene&) {
+  a->set_focus_callback([&called_focus_a, &b](psy::engine::Scene&) {
     called_focus_a = true;
     psy::system::ChangeTo(b);
   });
-  a->set_defocus_callback([&](psy::Scene&) { called_defocus_a = true; });
-  b->set_focus_callback([&called_focus_b](psy::Scene &self) { 
+  a->set_defocus_callback([&](psy::engine::Scene&) { called_defocus_a = true; });
+  b->set_focus_callback([&called_focus_b](psy::engine::Scene &self) { 
     called_focus_b = true;
     self.Finish();
   });
-  b->set_defocus_callback([&](psy::Scene&) { called_defocus_b = true; });
+  b->set_defocus_callback([&](psy::engine::Scene&) { called_defocus_b = true; });
   psy::system::Init();
   psy::system::ChangeTo(a);
   psy::system::Run();

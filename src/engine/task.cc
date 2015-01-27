@@ -5,6 +5,7 @@
 #include <SFML/System.hpp>
 
 namespace psy {
+namespace engine {
 
 // Warning: This should NOT be called.
 Task::Task() : finished_(false) {}
@@ -19,4 +20,5 @@ void Task::Update(const sf::Time &dt) {
   update_function_(dt);
 }
 
+}  // namespace engine
 }  // namespace psy

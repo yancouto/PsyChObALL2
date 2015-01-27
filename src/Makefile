@@ -29,7 +29,7 @@ else
 endif
 
 # All non-test files (except main)
-DEPS=psycho2.o scene.o task.o main_menu.o
+DEPS=psycho2.o scene.o task.o main_menu.o body.o
 # Tests
 TESTS=psycho2_test.o scene_test.o task_test.o main_menu_test.o
 
@@ -59,13 +59,13 @@ gtest_main.o:
 
 # Root related compilations. //
 
-main.o: main.cc psycho2.h menus/main_menu.h
+main.o: main.cc system/psycho2.h menu/main_menu.h
 	$(CC) $< $(CFLAGS)
 
-psycho2.o: psycho2.cc psycho2.h
+psycho2.o: system/psycho2.cc system/psycho2.h
 	$(CC) $< $(CFLAGS)
 
-psycho2_test.o: psycho2_test.cc psycho2.o
+psycho2_test.o: system/psycho2_test.cc system/psycho2.o
 	$(CC) $< $(GFLAGS)
 
 # // Root related compilations.
@@ -83,13 +83,16 @@ task.o: engine/task.cc engine/task.h
 task_test.o: engine/task_test.cc task.o
 	$(CC) $< $(GFLAGS)
 
+body.o: engine/body.cc engine/body.h
+	$(CC) $< $(CFLAGS)
+
 # // Engine related compilations.
 # Menu related compilations. //
 
-main_menu.o: menus/main_menu.cc menus/main_menu.h engine/task.h engine/scene.h
+main_menu.o: menu/main_menu.cc menu/main_menu.h engine/task.h engine/scene.h
 	$(CC) $< $(CFLAGS)
 
-main_menu_test.o: menus/main_menu_test.cc main_menu.o
+main_menu_test.o: menu/main_menu_test.cc main_menu.o
 	$(CC) $< $(GFLAGS)
 
 # // Menu related compilations.

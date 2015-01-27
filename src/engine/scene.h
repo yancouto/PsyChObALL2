@@ -13,6 +13,7 @@
 #include <engine/task.h>
 
 namespace psy {
+namespace engine {
 
 // A Scene is a class designed to manage all Tasks and renderable elements 
 // that are supposed to be active at the same time.
@@ -28,7 +29,7 @@ namespace psy {
 class Scene {
  public:
   typedef std::function<void (sf::RenderWindow &canvas)> RenderCallback;
-  typedef std::function<void (psy::Scene &self)> SceneCallback;
+  typedef std::function<void (psy::engine::Scene &self)> SceneCallback;
 
   Scene();
   virtual ~Scene();
@@ -88,6 +89,7 @@ class Scene {
   std::forward_list<Task> tasks_;
 };
 
+}  // namespace engine
 }  // namespace psy
 
 #endif  // PSYCHO2_ENGINE_SCENE_H_

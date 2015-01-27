@@ -8,6 +8,7 @@
 #include <engine/task.h>
 
 namespace psy {
+namespace engine {
 
 Scene::Scene() : active_(false), finished_(false) {}
 
@@ -49,4 +50,5 @@ void Scene::Finish() {
   finished_ = true;
 }
 
+}  // namespace engine
 }  // namespace psy

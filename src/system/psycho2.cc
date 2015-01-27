@@ -1,4 +1,4 @@
-#include <psycho2.h>
+#include <system/psycho2.h>
 
 #include <cassert>
 #include <cstdio>
@@ -7,13 +7,13 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 
-#include <menus/main_menu.h>
+#include <engine/scene.h>
 
 namespace {
 // Main game window.
 std::unique_ptr<sf::RenderWindow> window (nullptr);
 // Current Scene beign update and the next one.
-std::shared_ptr<psy::Scene> current_scene (nullptr), next_scene (nullptr);
+std::shared_ptr<psy::engine::Scene> current_scene (nullptr), next_scene (nullptr);
 
 // Manages Focus and Defocus and changes scenes
 void DoSceneChange() {
@@ -67,7 +67,7 @@ void Run() {
 
 void Release() {}
 
-void ChangeTo(std::shared_ptr<psy::Scene> scene) {
+void ChangeTo(std::shared_ptr<psy::engine::Scene> scene) {
   assert(!next_scene);  // Too much Scene changing!
   next_scene = scene;
 }

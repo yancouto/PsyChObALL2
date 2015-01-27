@@ -6,6 +6,7 @@
 #include <SFML/System.hpp>
 
 namespace psy {
+namespace engine {
 
 // Task is a functor with priority.
 class Task {
@@ -34,6 +35,7 @@ class Task {
   bool finished_;
 };
 
+}  // namespace engine
 }  // namespace psy
 
 #endif  // PSYCHO2_ENGINE_TASK_H_
