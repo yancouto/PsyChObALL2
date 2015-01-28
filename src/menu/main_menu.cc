@@ -48,7 +48,7 @@ void CreateMenu() {
 }
 
 void CreatePlayer() {
-  entities::Player *p = new entities::Player(400, 300);
+  entities::Player *p = new entities::Player(400.f, 300.f);
 
   auto current_scene = MainMenuScene();
   engine::Task player_update([](const sf::Time &dt) {

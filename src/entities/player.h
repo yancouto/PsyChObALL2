@@ -18,7 +18,8 @@ class Player : public engine::Body {
   explicit Player(const sf::Vector2f &position);
   virtual ~Player();
 
-  virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const;
+  virtual void draw(sf::RenderTarget &target, 
+                    sf::RenderStates states) const override;
   virtual void Update(const sf::Time &dt);
 
  private:

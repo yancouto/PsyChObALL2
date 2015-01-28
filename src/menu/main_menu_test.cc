@@ -3,6 +3,8 @@
 
 #include <menu/main_menu.cc>
 
+#include <entities/player.h>
+
 #include "gtest/gtest.h"
 
 TEST(MainMenuTest, SceneNonNull) {

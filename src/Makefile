@@ -31,7 +31,7 @@ endif
 # All non-test files (except main)
 DEPS=psycho2.o scene.o task.o main_menu.o body.o player.o
 # Tests
-TESTS=psycho2_test.o scene_test.o task_test.o main_menu_test.o
+TESTS=psycho2_test.o scene_test.o task_test.o main_menu_test.o body_test.o player.o
 
 # Adding a file instructions:
 # When you add a file, be sure to add its .o to DEPS
@@ -89,10 +89,13 @@ task_test.o: engine/task_test.cc task.o
 body.o: engine/body.cc engine/body.h
 	$(CC) $< $(CFLAGS)
 
+body_test.o: engine/body_test.cc body.o
+	$(CC) $< $(GFLAGS)
+
 # // Engine related compilations.
 # Menu related compilations. //
 
-main_menu.o: menu/main_menu.cc menu/main_menu.h engine/task.h engine/scene.h
+main_menu.o: menu/main_menu.cc menu/main_menu.h engine/task.h engine/scene.h entities/player.h
 	$(CC) $< $(CFLAGS)
 
 main_menu_test.o: menu/main_menu_test.cc main_menu.o
