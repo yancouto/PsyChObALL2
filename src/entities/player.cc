@@ -18,16 +18,16 @@ Player::Player(float x, float y) :
   // Key pressed control map initialization.
   key_pressed_controls_ {
     // [WASD control callbacks.]
-    {Key::W, [this](const sf::Time &dt) {
+    {Key::W, [this](const sf::RenderWindow&, const sf::Time &dt) {
       circle_shape_.move(0, -1);
     }},
-    {Key::A, [this](const sf::Time &dt) {
+    {Key::A, [this](const sf::RenderWindow&, const sf::Time &dt) {
       circle_shape_.move(-1, 0);  
     }},
-    {Key::S, [this](const sf::Time &dt) {
+    {Key::S, [this](const sf::RenderWindow&, const sf::Time &dt) {
       circle_shape_.move(0, 1);
     }},
-    {Key::D, [this](const sf::Time &dt) {
+    {Key::D, [this](const sf::RenderWindow&, const sf::Time &dt) {
       circle_shape_.move(1, 0);
     }}
     // [/WASD control callbacks.]
@@ -45,14 +45,14 @@ void Player::draw(sf::RenderTarget &target, sf::RenderStates states) const {
   target.draw(circle_shape_, states);
 }
 
-void Player::Update(const sf::Time &dt) {
+void Player::Update(const sf::RenderWindow &window, const sf::Time &dt) {
   // Iterate through the KeyPressed control map and check if Key has been
   // pressed. If true, then call its control callback.
   for (auto it_keys_pressed = key_pressed_controls_.begin();
        it_keys_pressed != key_pressed_controls_.end();
        ++it_keys_pressed) {
     if (sf::Keyboard::isKeyPressed(it_keys_pressed->first))  // Gets Key.
-      it_keys_pressed->second(dt);                           // Calls Value.
+      it_keys_pressed->second(window, dt);                           // Calls Value.
   } 
 }
 

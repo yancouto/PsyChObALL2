@@ -27,11 +27,11 @@ bool task_finished(Task &current_task) {
 }  // namespace
 
 // If the Scene is inactive or is set to finish, we do not update.
-void Scene::Update(const sf::Time &dt) {
+void Scene::Update(const sf::RenderWindow &window, const sf::Time &dt) {
   if (!active_ || finished_) return;
 
   for(auto it = tasks_.begin(); it != tasks_.end(); ++it)
-    it->Update(dt);
+    it->Update(window, dt);
   
   std::remove_if(tasks_.begin(), tasks_.end(), task_finished);
 }

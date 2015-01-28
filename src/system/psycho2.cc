@@ -14,7 +14,8 @@ namespace {
 // Main game window.
 std::unique_ptr<sf::RenderWindow> window (nullptr);
 // Current Scene beign update and the next one.
-std::shared_ptr<psy::engine::Scene> current_scene (nullptr), next_scene (nullptr);
+std::shared_ptr<psy::engine::Scene> current_scene (nullptr), 
+                                    next_scene (nullptr);
 
 // Manages Focus and Defocus and changes scenes
 void DoSceneChange() {
@@ -52,7 +53,7 @@ void Run() {
 
     window->clear();
     if (current_scene) {
-      current_scene->Update(loop_clock.restart());
+      current_scene->Update(*window, loop_clock.restart());
       current_scene->Render(*window);
     }
     window->display();

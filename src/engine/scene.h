@@ -38,7 +38,7 @@ class Scene {
   void Render(sf::RenderWindow &canvas) const;
 
   // Method that updates all tasks from this Scene.
-  void Update(const sf::Time &dt);
+  void Update(const sf::RenderWindow &window, const sf::Time &dt);
 
   // Method called once it enters as active Scene.
   void Focus();

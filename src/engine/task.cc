@@ -3,6 +3,7 @@
 #include <functional>
 
 #include <SFML/System.hpp>
+#include <SFML/Graphics.hpp>
 
 namespace psy {
 namespace engine {
@@ -10,14 +11,16 @@ namespace engine {
 // Warning: This should NOT be called.
 Task::Task() : finished_(false) {}
  
-Task::Task(const std::function<void (const sf::Time &dt)> &func)
+Task::Task(const std::function<
+  void (const sf::RenderWindow &window, 
+        const sf::Time &dt)> &func)
     : update_function_(func), 
       finished_(false) {}
 
 Task::~Task() {}
 
-void Task::Update(const sf::Time &dt) {
-  update_function_(dt);
+void Task::Update(const sf::RenderWindow &window, const sf::Time &dt) {
+  update_function_(window, dt);
 }
 
 }  // namespace engine
