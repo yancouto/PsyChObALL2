@@ -18,7 +18,7 @@ class Body : public sf::Drawable {
     sf::RenderStates states) const = 0;
 
   sf::Transformable& transform() { return transform_; }
-
+  const sf::Transformable& const_transform() const { return transform_; }
  private:
   // Used for transformation of this Body.
   sf::Transformable transform_;

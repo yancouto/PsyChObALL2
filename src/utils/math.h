@@ -1,0 +1,20 @@
+#ifndef PSYCHO_UTILS_MATH_H_
+#define PSYCHO_UTILS_MATH_H_
+
+namespace psy {
+namespace utils {
+
+namespace math {
+
+// Converts radians to degrees.
+int rad_to_deg(double radians);
+
+// Converts degrees to radians.
+double deg_to_rad(int degrees);
+
+}  // namespace math
+
+}  // namespace utils
+}  // namespace psy
+
+#endif

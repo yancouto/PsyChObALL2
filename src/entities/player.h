@@ -30,7 +30,9 @@ class Player : public engine::Body {
 
  private:
   sf::CircleShape circle_shape_;
+  sf::Transform circle_transform_;
   KeyboardMap key_pressed_controls_;
+  sf::Vector2i mouse_position_;
 };
 
 }  // namespace entities

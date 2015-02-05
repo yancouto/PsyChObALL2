@@ -29,7 +29,7 @@ else
 endif
 
 # All non-test files (except main)
-DEPS=psycho2.o scene.o task.o main_menu.o body.o player.o
+DEPS=psycho2.o math.o scene.o task.o main_menu.o body.o player.o
 # Tests
 TESTS=psycho2_test.o scene_test.o task_test.o main_menu_test.o body_test.o player_test.o
 
@@ -104,13 +104,19 @@ main_menu_test.o: menu/main_menu_test.cc main_menu.o
 # // Menu related compilations.
 # Entities related compilations.
 
-player.o: entities/player.cc entities/player.h engine/body.h
+player.o: entities/player.cc entities/player.h engine/body.h utils/math.h
 	$(CC) $< $(CFLAGS)
 
 player_test.o: entities/player_test.cc player.o
 	$(CC) $< $(GFLAGS)
 
 # // Entities related compilations.
+# Utils related compilations.
+
+math.o: utils/math.cc utils/math.h
+	$(CC) $< $(CFLAGS)
+
+# // Utils related compilations.
 
 .PHONY: clean
 clean:
