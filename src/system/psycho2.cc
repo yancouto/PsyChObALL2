@@ -9,6 +9,7 @@
 
 #include <engine/scene.h>
 #include <entities/player.h>
+#include <system/globals.h>
 
 namespace {
 // Main game window.
@@ -31,7 +32,9 @@ namespace psy {
 namespace system {
 
 void Init() {
-  window.reset(new sf::RenderWindow(sf::VideoMode(800, 600), "PsyChObALL 2"));
+  window.reset(new sf::RenderWindow(sf::VideoMode(
+    window_size.x, window_size.y), 
+    "PsyChObALL 2"));
 }
 
 // Runs the main game loop.
@@ -48,12 +51,17 @@ void Run() {
     while (window->pollEvent(event)) {  // Event handling
       if (event.type == sf::Event::Closed)
         window->close();
+
+      if (event.type == sf::Event::MouseMoved) {
+        mouse_position.x = event.mouseMove.x;
+        mouse_position.y = event.mouseMove.y;
+      }
     }
     
 
     window->clear();
     if (current_scene) {
-      current_scene->Update(*window, loop_clock.restart());
+      current_scene->Update(loop_clock.restart());
       current_scene->Render(*window);
     }
     window->display();

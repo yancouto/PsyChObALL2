@@ -15,8 +15,7 @@ namespace entities {
 class Player : public engine::Body {
  public:
   typedef std::map<sf::Keyboard::Key, 
-                   std::function<void (const sf::RenderWindow &window, 
-                                       const sf::Time &dt)>> KeyboardMap;
+                   std::function<void (const sf::Time &dt)>> KeyboardMap;
 
   Player(float x, float y);
   explicit Player(const sf::Vector2f &position);
@@ -24,15 +23,13 @@ class Player : public engine::Body {
 
   virtual void draw(sf::RenderTarget &target, 
                     sf::RenderStates states) const override;
-  virtual void Update(const sf::RenderWindow &window, const sf::Time &dt);
+  virtual void Update(const sf::Time &dt);
 
   KeyboardMap& key_pressed_controls() { return key_pressed_controls_; }
 
  private:
   sf::CircleShape circle_shape_;
-  sf::Transform circle_transform_;
   KeyboardMap key_pressed_controls_;
-  sf::Vector2i mouse_position_;
 };
 
 }  // namespace entities

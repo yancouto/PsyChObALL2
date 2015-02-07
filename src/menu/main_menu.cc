@@ -18,7 +18,7 @@ void CreateMenu() {
   engine::Scene *m = new engine::Scene;  // New menu
 
   // Sets up and adds to the scene a dummy task for testing.
-  engine::Task hello_world([](const sf::RenderWindow&, const sf::Time &dt) {
+  engine::Task hello_world([](const sf::Time &dt) {
     // Every second we print out the FPS.
     if (fps_counter < 1000) {
       fps_counter += dt.asMilliseconds();
@@ -51,9 +51,8 @@ void CreatePlayer() {
   entities::Player *p = new entities::Player(400.f, 300.f);
 
   auto current_scene = MainMenuScene();
-  engine::Task player_update([](const sf::RenderWindow& window, 
-                                const sf::Time &dt) {
-    psy::menu::Player()->Update(window, dt);
+  engine::Task player_update([](const sf::Time &dt) {
+    psy::menu::Player()->Update(dt);
   });
   current_scene->AddTask(player_update);
   

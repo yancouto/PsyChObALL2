@@ -15,27 +15,23 @@ class Task {
   // Warning: This should NOT be called.
   Task();
   // The higher the priority, the higher up on the stack.
-  explicit Task(const std::function<void (
-    const sf::RenderWindow &window,
-    const sf::Time &dt)> &func);
+  explicit Task(const std::function<void (const sf::Time &dt)> &func);
   
   virtual ~Task();
 
   // Updates this task with an elapsed delta time (dt).
-  void Update(const sf::RenderWindow &window, const sf::Time &dt);
+  void Update(const sf::Time &dt);
 
   // Overloades the function call operator for Task to work as a Functor.
-  void operator()(const sf::RenderWindow &window, const sf::Time &dt) {
-    update_function_(window, dt);
+  void operator()(const sf::Time &dt) {
+    Update(dt);
   } 
 
   bool finished() { return finished_; }
   void set_finished(bool finished) { finished_ = finished; }
 
  private:
-  std::function<void (
-    const sf::RenderWindow &window, 
-    const sf::Time &dt)> update_function_;
+  std::function<void (const sf::Time &dt)> update_function_;
   
   // Checks whether it is to be destroyed next frame.
   bool finished_;

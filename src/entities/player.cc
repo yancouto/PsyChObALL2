@@ -10,6 +10,7 @@
 #include <SFML/Window.hpp>
 
 #include <utils/math.h>
+#include <system/globals.h>
 
 namespace psy {
 namespace entities {
@@ -22,16 +23,16 @@ Player::Player(float x, float y) :
   // Key pressed control map initialization.
   key_pressed_controls_ {
     // [WASD control callbacks.]
-    {Key::W, [this](const sf::RenderWindow&, const sf::Time &dt) {
+    {Key::W, [this](const sf::Time &dt) {
       circle_shape_.move(0, -1);
     }},
-    {Key::A, [this](const sf::RenderWindow&, const sf::Time &dt) {
+    {Key::A, [this](const sf::Time &dt) {
       circle_shape_.move(-1, 0);  
     }},
-    {Key::S, [this](const sf::RenderWindow&, const sf::Time &dt) {
+    {Key::S, [this](const sf::Time &dt) {
       circle_shape_.move(0, 1);
     }},
-    {Key::D, [this](const sf::RenderWindow&, const sf::Time &dt) {
+    {Key::D, [this](const sf::Time &dt) {
       circle_shape_.move(1, 0);
     }}
     // [/WASD control callbacks.]
@@ -41,7 +42,7 @@ Player::Player(float x, float y) :
   circle_shape_.setFillColor(sf::Color::Green);
   float r = circle_shape_.getRadius();
   circle_shape_.setOrigin(r, r);
-  circle_shape_.setPosition(400, 300);
+  circle_shape_.setPosition(x, y);
 }
 
 Player::Player(const sf::Vector2f &position) : 
@@ -53,29 +54,24 @@ void Player::draw(sf::RenderTarget &target, sf::RenderStates states) const {
   target.draw(circle_shape_, states);
 }
 
-void Player::Update(const sf::RenderWindow &window, const sf::Time &dt) {
+void Player::Update(const sf::Time &dt) {
   // Iterate through the KeyPressed control map and check if Key has been
   // pressed. If true, then call its control callback.
   for (auto it_keys_pressed = key_pressed_controls_.begin();
        it_keys_pressed != key_pressed_controls_.end();
        ++it_keys_pressed) {
     if (sf::Keyboard::isKeyPressed(it_keys_pressed->first))  // Gets Key.
-      it_keys_pressed->second(window, dt);                   // Calls Value.
+      it_keys_pressed->second(dt);                           // Calls Value.
   }
   
   // Coordenates mouse movement and shape rotation.
-  sf::Vector2i mouse_position = sf::Mouse::getPosition(window);
   sf::Vector2f player_position = circle_shape_.getPosition();
-  mouse_position_ = mouse_position;
   // Finds the angle to be rotated in radians.
-  float angle = atan2(mouse_position.y - player_position.y,
-                      mouse_position.x - player_position.x);
+  float angle = atan2(psy::system::mouse_position.y - player_position.y,
+                      psy::system::mouse_position.x - player_position.x);
   angle = psy::utils::math::rad_to_deg(angle);  // Converts to degrees.
   //circle_shape_.setRotation(angle);
   circle_shape_.setRotation(angle);
-
-  if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left))
-    printf("Mouse position = [%d, %d]\n", mouse_position.x, mouse_position.y);  
 }
 
 }  // namespace entities

@@ -29,7 +29,7 @@ else
 endif
 
 # All non-test files (except main)
-DEPS=psycho2.o math.o scene.o task.o main_menu.o body.o player.o
+DEPS=psycho2.o math.o scene.o task.o main_menu.o body.o player.o globals.o
 # Tests
 TESTS=psycho2_test.o scene_test.o task_test.o main_menu_test.o body_test.o player_test.o
 
@@ -70,6 +70,9 @@ psycho2.o: system/psycho2.cc system/psycho2.h
 
 psycho2_test.o: system/psycho2_test.cc psycho2.o
 	$(CC) $< $(GFLAGS)
+
+globals.o: system/globals.cc system/globals.h
+	$(CC) $< $(CFLAGS)
 
 # // System related compilations.
 # Engine related compilations. //
