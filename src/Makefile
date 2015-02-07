@@ -29,7 +29,7 @@ else
 endif
 
 # All non-test files (except main)
-DEPS=psycho2.o scene.o task.o main_menu.o body.o player.o globals.o
+DEPS=psycho2.o scene.o task.o main_menu.o body.o player.o globals.o math.o
 # Tests
 TESTS=psycho2_test.o scene_test.o task_test.o main_menu_test.o body_test.o player_test.o globals_test.o math_test.o
 
@@ -45,8 +45,9 @@ TESTS=psycho2_test.o scene_test.o task_test.o main_menu_test.o body_test.o playe
 # Is this the best way to do this? Probably not.
 # Do I care? Probably not.
 
+game: psy2
 
-all: psy2
+all: psy2 test
 
 psy2: $(DEPS) main.o
 	$(CC) $^ -o $@ $(LDFLAGS)
