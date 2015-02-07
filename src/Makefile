@@ -29,9 +29,9 @@ else
 endif
 
 # All non-test files (except main)
-DEPS=psycho2.o math.o scene.o task.o main_menu.o body.o player.o globals.o
+DEPS=psycho2.o scene.o task.o main_menu.o body.o player.o globals.o
 # Tests
-TESTS=psycho2_test.o scene_test.o task_test.o main_menu_test.o body_test.o player_test.o
+TESTS=psycho2_test.o scene_test.o task_test.o main_menu_test.o body_test.o player_test.o globals_test.o math_test.o
 
 # Adding a file instructions:
 # When you add a file, be sure to add its .o to DEPS
@@ -74,6 +74,9 @@ psycho2_test.o: system/psycho2_test.cc psycho2.o
 globals.o: system/globals.cc system/globals.h
 	$(CC) $< $(CFLAGS)
 
+globals_test.o: system/globals_test.cc globals.o
+	$(CC) $< $(GFLAGS)
+
 # // System related compilations.
 # Engine related compilations. //
 
@@ -107,7 +110,7 @@ main_menu_test.o: menu/main_menu_test.cc main_menu.o
 # // Menu related compilations.
 # Entities related compilations.
 
-player.o: entities/player.cc entities/player.h engine/body.h utils/math.h
+player.o: entities/player.cc entities/player.h engine/body.h utils/math.h system/globals.h
 	$(CC) $< $(CFLAGS)
 
 player_test.o: entities/player_test.cc player.o
@@ -118,6 +121,9 @@ player_test.o: entities/player_test.cc player.o
 
 math.o: utils/math.cc utils/math.h
 	$(CC) $< $(CFLAGS)
+
+math_test.o: utils/math_test.cc math.o
+	$(CC) $< $(GFLAGS)
 
 # // Utils related compilations.
 

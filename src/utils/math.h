@@ -6,6 +6,9 @@ namespace utils {
 
 namespace math {
 
+// Pi for convenience.
+extern const double kPi;
+
 // Converts radians to degrees.
 int rad_to_deg(double radians);
 
