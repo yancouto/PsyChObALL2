@@ -34,7 +34,13 @@ namespace system {
 void Init() {
   window.reset(new sf::RenderWindow(sf::VideoMode(
     window_size.x, window_size.y), 
-    "PsyChObALL 2"));
+    "PsyChObALL 2", sf::Style::Default,
+    sf::ContextSettings(0, 0, 8, 2, 0)));  // Only change antialiasing level.
+  window->setVerticalSyncEnabled(true);
+  window->setFramerateLimit(60);
+  window->setPosition(sf::Vector2<int>(
+    (desktop_resolution.x-window_size.x)/2, 
+    (desktop_resolution.y-window_size.y)/2));
 }
 
 // Runs the main game loop.

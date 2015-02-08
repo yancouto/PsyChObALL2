@@ -45,9 +45,9 @@ TESTS=psycho2_test.o scene_test.o task_test.o main_menu_test.o body_test.o playe
 # Is this the best way to do this? Probably not.
 # Do I care? Probably not.
 
-game: psy2
-
 all: psy2 test
+
+game: psy2
 
 psy2: $(DEPS) main.o
 	$(CC) $^ -o $@ $(LDFLAGS)
