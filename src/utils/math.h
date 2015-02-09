@@ -10,10 +10,10 @@ namespace math {
 extern const double kPi;
 
 // Converts radians to degrees.
-int rad_to_deg(double radians);
+int RadToDeg(double radians);
 
 // Converts degrees to radians.
-double deg_to_rad(int degrees);
+double DegToRad(int degrees);
 
 }  // namespace math
 

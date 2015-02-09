@@ -11,6 +11,9 @@ namespace utils {
 sf::Color PsychoColor(const sf::Time &time);
 sf::Color PsychoColor(const sf::Time &time, sf::Uint8 alpha);
 
+sf::Color TrigoColor(const sf::Time &time);
+sf::Color TrigoColor(const sf::Time &time, sf::Uint8 alpha);
+
 }  // namespace utils
 }  // namespace psy
 

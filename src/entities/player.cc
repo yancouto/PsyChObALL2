@@ -36,7 +36,7 @@ Player::Player(float x, float y) :
   } {
 
   // Intiializes all the separate drawable entities.
-  circle_shape_.setFillColor(sf::Color::Green);
+  circle_shape_.setFillColor(psy::utils::TrigoColor(color_clock_.getElapsedTime()));
   float r = circle_shape_.getRadius();
   circle_shape_.setOrigin(r, r);
   circle_shape_.setPosition(x, y);
@@ -66,11 +66,11 @@ void Player::Update(const sf::Time &dt) {
   // Finds the angle to be rotated in radians.
   float angle = atan2(psy::system::mouse_position.y - player_position.y,
                       psy::system::mouse_position.x - player_position.x);
-  angle = psy::utils::math::rad_to_deg(angle);  // Converts to degrees.
+  angle = psy::utils::math::RadToDeg(angle);  // Converts to degrees.
   //circle_shape_.setRotation(angle);
   circle_shape_.setRotation(angle);
 
-  circle_shape_.setFillColor(psy::utils::PsychoColor(color_clock_.getElapsedTime()));
+  circle_shape_.setFillColor(psy::utils::TrigoColor(color_clock_.getElapsedTime()));
 }
 
 }  // namespace entities

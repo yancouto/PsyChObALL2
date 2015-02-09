@@ -126,7 +126,7 @@ math.o: utils/math.cc utils/math.h
 math_test.o: utils/math_test.cc math.o
 	$(CC) $< $(GFLAGS)
 
-color.o: utils/color.cc utils/color.h
+color.o: utils/color.cc utils/color.h utils/math.h
 	$(CC) $< $(CFLAGS)
 
 color_test.o: utils/color_test.cc color.o

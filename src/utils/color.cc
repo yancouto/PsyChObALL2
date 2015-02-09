@@ -1,5 +1,9 @@
 #include <utils/color.h>
 
+#include <cmath>
+
+#include <utils/math.h>
+
 namespace psy {
 namespace utils {
 
@@ -45,6 +49,20 @@ sf::Color PsychoColor(const sf::Time &time, sf::Uint8 alpha) {
 
 sf::Color PsychoColor(const sf::Time &time) {
   return PsychoColor(time, 255);
+}
+
+sf::Color TrigoColor(const sf::Time &time, sf::Uint8 alpha) {
+  static int cycle_time = 10000;
+  using psy::utils::math::kPi;
+  double t = (time.asMilliseconds() % cycle_time) * kPi * 2. / cycle_time;
+  double r = (sin(t) + 1) / 2,
+         g = (sin(t + 2. * kPi / 3.) + 1) / 2,
+         b = (sin(t + 1.2 * kPi) + 1) / 2;
+  return sf::Color(r * 255, g * 255, b * 255, alpha);
+}
+
+sf::Color TrigoColor(const sf::Time &time) {
+  return TrigoColor(time, 255);
 }
 
 }  // namespace utils
