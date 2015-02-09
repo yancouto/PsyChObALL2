@@ -8,7 +8,7 @@
 #include "gtest/gtest.h"
 
 TEST(MainMenuTest, SceneNonNull) {
-  EXPECT_NE(psy::menu::MainMenuScene(), nullptr);
+  EXPECT_NE(psy::menu::MainMenuState(), nullptr);
 }
 
 // TODO: Better Tests

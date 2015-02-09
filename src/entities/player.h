@@ -1,5 +1,5 @@
-#ifndef PSYCHO_ENTITIES_PLAYER_H_
-#define PSYCHO_ENTITIES_PLAYER_H_
+#ifndef PSY_ENTITIES_PLAYER_H_
+#define PSY_ENTITIES_PLAYER_H_
 
 #include <map>
 #include <functional>
@@ -37,4 +37,4 @@ class Player : public engine::Body {
 }  // namespace entities
 }  // namespace psy
 
-#endif  // PSYCHO_ENTITIES_PLAYER_H_
+#endif  // PSY_ENTITIES_PLAYER_H_

@@ -1,26 +1,26 @@
 // This module has the contents of the game's main menu.
-// @see Scene
+// @see State
 
-#ifndef PSYCHO2_MENU_MAIN_MENU_H_
-#define PSYCHO2_MENU_MAIN_MENU_H_ 
+#ifndef PSY_MENU_MAIN_MENU_H_
+#define PSY_MENU_MAIN_MENU_H_ 
 
 #include <forward_list>
 #include <memory>
 
 #include <SFML/Graphics.hpp>
 
-#include <engine/scene.h>
+#include <engine/state.h>
 #include <entities/player.h>
 
 namespace psy {
 namespace menu {
 
-// Returns the Main Menu Scene, that handles all drawable and stuff for the menu
-std::shared_ptr<engine::Scene> MainMenuScene();
+// Returns the Main Menu State, that handles all drawable and stuff for the menu
+std::shared_ptr<engine::State> MainMenuState();
 
 std::shared_ptr<entities::Player> Player();
 
 }  // namespace menus
 }  // namespace psy
 
-#endif  // PSYCHO2_MENU_MAIN_MENU_H_
+#endif  // PSY_MENU_MAIN_MENU_H_

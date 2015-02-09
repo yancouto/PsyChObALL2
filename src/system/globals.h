@@ -1,5 +1,5 @@
-#ifndef PSYCHO_UTILS_GLOBALS_H_
-#define PSYCHO_UTILS_GLOBALS_H_
+#ifndef PSY_SYSTEM_GLOBALS_H_
+#define PSY_SYSTEM_GLOBALS_H_
 
 #include <SFML/System.hpp>
 
@@ -13,4 +13,4 @@ extern sf::Vector2<int>    desktop_resolution;
 }  // namespace system
 }  // namespace psy
 
-#endif  // PSYCHO_UTILS_GLOBALS_H_
+#endif  // PSY_SYSTEM_GLOBALS_H_

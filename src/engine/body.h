@@ -1,5 +1,5 @@
-#ifndef PSYCHO_ENGINE_BODY_H_
-#define PSYCHO_ENGINE_BODY_H_
+#ifndef PSY_ENGINE_BODY_H_
+#define PSY_ENGINE_BODY_H_
 
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
@@ -27,4 +27,4 @@ class Body : public sf::Drawable {
 }  // namespace engine
 }  // namespace psy
 
-#endif // PSYCHO_ENGINE_BODY_H_
+#endif // PSY_ENGINE_BODY_H_

@@ -1,4 +1,4 @@
-#include <system/psycho2.h>
+#include <system/manager.h>
 
 #include <cassert>
 #include <cstdio>
@@ -7,23 +7,21 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 
-#include <engine/scene.h>
-#include <entities/player.h>
 #include <system/globals.h>
 
 namespace {
 // Main game window.
 std::unique_ptr<sf::RenderWindow> window (nullptr);
-// Current Scene beign update and the next one.
-std::shared_ptr<psy::engine::Scene> current_scene (nullptr), 
-                                    next_scene (nullptr);
+// Current State beign update and the next one.
+std::shared_ptr<psy::engine::State> current_state (nullptr), 
+                                    next_state (nullptr);
 
-// Manages Focus and Defocus and changes scenes
-void DoSceneChange() {
-  if (current_scene) current_scene->DeFocus();
-  current_scene = next_scene;
-  next_scene = nullptr;
-  current_scene->Focus();
+// Manages Focus and Defocus and changes states
+void DoStateChange() {
+  if (current_state) current_state->DeFocus();
+  current_state = next_state;
+  next_state = nullptr;
+  current_state->Focus();
 }
 
 }  // namespace
@@ -46,7 +44,7 @@ void Init() {
 // Runs the main game loop.
 // Order of handling priority:
 //  1. Event handling.
-//  2. Scene updating.
+//  2. State updating.
 //  3. Rendering.
 // TODO(Renato): Review order of priority.
 void Run() {
@@ -66,26 +64,26 @@ void Run() {
     
 
     window->clear();
-    if (current_scene) {
-      current_scene->Update(loop_clock.restart());
-      current_scene->Render(*window);
+    if (current_state) {
+      current_state->Update(loop_clock.restart());
+      current_state->Render(*window);
     }
     window->display();
 
-    if (next_scene) DoSceneChange();
-    if (current_scene && current_scene->finished()) break;
-    if (!current_scene) break;
+    if (next_state) DoStateChange();
+    if (current_state && current_state->finished()) break;
+    if (!current_state) break;
   }
   
-  // Finishes the scene.
-  if (current_scene) current_scene->DeFocus();
+  // Finishes the state.
+  if (current_state) current_state->DeFocus();
 }
 
 void Release() {}
 
-void ChangeTo(std::shared_ptr<psy::engine::Scene> scene) {
-  assert(!next_scene);  // Too much Scene changing!
-  next_scene = scene;
+void ChangeTo(std::shared_ptr<psy::engine::State> state) {
+  assert(!next_state);  // Too much State changing!
+  next_state = state;
 }
 
 }  // namespace system

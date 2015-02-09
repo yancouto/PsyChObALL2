@@ -1,5 +1,5 @@
-#ifndef PSYCHO2_ENGINE_TASK_H_
-#define PSYCHO2_ENGINE_TASK_H_
+#ifndef PSY_ENGINE_TASK_H_
+#define PSY_ENGINE_TASK_H_
 
 #include <functional>
 
@@ -40,4 +40,4 @@ class Task {
 }  // namespace engine
 }  // namespace psy
 
-#endif  // PSYCHO2_ENGINE_TASK_H_
+#endif  // PSY_ENGINE_TASK_H_

@@ -2,8 +2,8 @@
 
 #include <functional>
 
-#include <SFML/System.hpp>
 #include <SFML/Graphics.hpp>
+#include <SFML/System.hpp>
 
 namespace psy {
 namespace engine {

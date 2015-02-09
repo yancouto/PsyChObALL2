@@ -1,21 +1,19 @@
-#include <engine/scene.h>
+#include <engine/state.h>
 
 #include <algorithm>
 
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
 
-#include <engine/task.h>
-
 namespace psy {
 namespace engine {
 
-Scene::Scene() : active_(false), finished_(false) {}
+State::State() : active_(false), finished_(false) {}
 
-Scene::~Scene() {}
+State::~State() {}
 
-// We need to see whether the Scene is actually running.
-void Scene::Render(sf::RenderWindow &canvas) const {
+// We need to see whether the State is actually running.
+void State::Render(sf::RenderWindow &canvas) const {
   if (active_ && !finished_ && render_callback_) render_callback_(canvas);
 }
 
@@ -26,8 +24,8 @@ bool task_finished(Task &current_task) {
 }
 }  // namespace
 
-// If the Scene is inactive or is set to finish, we do not update.
-void Scene::Update(const sf::Time &dt) {
+// If the State is inactive or is set to finish, we do not update.
+void State::Update(const sf::Time &dt) {
   if (!active_ || finished_) return;
 
   for(auto it = tasks_.begin(); it != tasks_.end(); ++it)
@@ -36,17 +34,17 @@ void Scene::Update(const sf::Time &dt) {
   std::remove_if(tasks_.begin(), tasks_.end(), task_finished);
 }
 
-void Scene::Focus() {
+void State::Focus() {
   active_ = true;
   if(focus_callback_) focus_callback_(*this);
 }
 
-void Scene::DeFocus() {
+void State::DeFocus() {
   active_ = false;
   if(defocus_callback_) defocus_callback_(*this);
 }
 
-void Scene::Finish() {
+void State::Finish() {
   finished_ = true;
 }
 

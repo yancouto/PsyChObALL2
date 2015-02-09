@@ -2,16 +2,12 @@
 
 #include <cmath>
 #include <cstdio>
-#include <map>
-#include <functional>
 
 #include <SFML/System.hpp>
-#include <SFML/Graphics.hpp>
-#include <SFML/Window.hpp>
 
+#include <system/globals.h>
 #include <utils/color.h>
 #include <utils/math.h>
-#include <system/globals.h>
 
 namespace psy {
 namespace entities {

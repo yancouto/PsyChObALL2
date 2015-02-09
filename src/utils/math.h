@@ -1,5 +1,5 @@
-#ifndef PSYCHO_UTILS_MATH_H_
-#define PSYCHO_UTILS_MATH_H_
+#ifndef PSY_UTILS_MATH_H_
+#define PSY_UTILS_MATH_H_
 
 namespace psy {
 namespace utils {
@@ -20,4 +20,4 @@ double deg_to_rad(int degrees);
 }  // namespace utils
 }  // namespace psy
 
-#endif
+#endif  // PSY_UTILS_MATH_H_

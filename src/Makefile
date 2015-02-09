@@ -29,9 +29,9 @@ else
 endif
 
 # All non-test files (except main)
-DEPS=psycho2.o scene.o task.o main_menu.o body.o player.o globals.o math.o color.o
+DEPS=manager.o state.o task.o main_menu.o body.o player.o globals.o math.o color.o
 # Tests
-TESTS=psycho2_test.o scene_test.o task_test.o main_menu_test.o body_test.o player_test.o globals_test.o math_test.o color_test.o
+TESTS=manager_test.o state_test.o task_test.o main_menu_test.o body_test.o player_test.o globals_test.o math_test.o color_test.o
 
 # Adding a file instructions:
 # When you add a file, be sure to add its .o to DEPS
@@ -60,16 +60,16 @@ gtest_main.o:
 
 # Root related compilations. //
 
-main.o: main.cc system/psycho2.h menu/main_menu.h
+main.o: main.cc system/manager.h menu/main_menu.h
 	$(CC) $< $(CFLAGS)
 
 # // Root related compilations.
 # System related compilations. //
 
-psycho2.o: system/psycho2.cc system/psycho2.h
+manager.o: system/manager.cc system/manager.h
 	$(CC) $< $(CFLAGS)
 
-psycho2_test.o: system/psycho2_test.cc psycho2.o
+manager_test.o: system/manager_test.cc manager.o
 	$(CC) $< $(GFLAGS)
 
 globals.o: system/globals.cc system/globals.h
@@ -81,10 +81,10 @@ globals_test.o: system/globals_test.cc globals.o
 # // System related compilations.
 # Engine related compilations. //
 
-scene.o: engine/scene.cc engine/scene.h engine/task.h
+state.o: engine/state.cc engine/state.h engine/task.h
 	$(CC) $< $(CFLAGS)
 
-scene_test.o: engine/scene_test.cc scene.o
+state_test.o: engine/state_test.cc state.o
 	$(CC) $< $(GFLAGS)
 
 task.o: engine/task.cc engine/task.h
@@ -102,7 +102,7 @@ body_test.o: engine/body_test.cc body.o
 # // Engine related compilations.
 # Menu related compilations. //
 
-main_menu.o: menu/main_menu.cc menu/main_menu.h engine/task.h engine/scene.h entities/player.h
+main_menu.o: menu/main_menu.cc menu/main_menu.h engine/task.h engine/state.h entities/player.h system/manager.h
 	$(CC) $< $(CFLAGS)
 
 main_menu_test.o: menu/main_menu_test.cc main_menu.o
@@ -111,7 +111,7 @@ main_menu_test.o: menu/main_menu_test.cc main_menu.o
 # // Menu related compilations.
 # Entities related compilations.
 
-player.o: entities/player.cc entities/player.h engine/body.h utils/math.h system/globals.h
+player.o: entities/player.cc entities/player.h engine/body.h utils/math.h utils/color.h system/globals.h
 	$(CC) $< $(CFLAGS)
 
 player_test.o: entities/player_test.cc player.o
