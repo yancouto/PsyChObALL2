@@ -29,9 +29,9 @@ else
 endif
 
 # All non-test files (except main)
-DEPS=psycho2.o scene.o task.o main_menu.o body.o player.o globals.o math.o
+DEPS=psycho2.o scene.o task.o main_menu.o body.o player.o globals.o math.o color.o
 # Tests
-TESTS=psycho2_test.o scene_test.o task_test.o main_menu_test.o body_test.o player_test.o globals_test.o math_test.o
+TESTS=psycho2_test.o scene_test.o task_test.o main_menu_test.o body_test.o player_test.o globals_test.o math_test.o color_test.o
 
 # Adding a file instructions:
 # When you add a file, be sure to add its .o to DEPS
@@ -124,6 +124,12 @@ math.o: utils/math.cc utils/math.h
 	$(CC) $< $(CFLAGS)
 
 math_test.o: utils/math_test.cc math.o
+	$(CC) $< $(GFLAGS)
+
+color.o: utils/color.cc utils/color.h
+	$(CC) $< $(CFLAGS)
+
+color_test.o: utils/color_test.cc color.o
 	$(CC) $< $(GFLAGS)
 
 # // Utils related compilations.

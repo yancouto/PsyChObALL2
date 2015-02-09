@@ -9,6 +9,7 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 
+#include <utils/color.h>
 #include <utils/math.h>
 #include <system/globals.h>
 
@@ -24,16 +25,16 @@ Player::Player(float x, float y) :
   key_pressed_controls_ {
     // [WASD control callbacks.]
     {Key::W, [this](const sf::Time &dt) {
-      circle_shape_.move(0, -1);
+      circle_shape_.move(0, -5);
     }},
     {Key::A, [this](const sf::Time &dt) {
-      circle_shape_.move(-1, 0);  
+      circle_shape_.move(-5, 0);  
     }},
     {Key::S, [this](const sf::Time &dt) {
-      circle_shape_.move(0, 1);
+      circle_shape_.move(0, 5);
     }},
     {Key::D, [this](const sf::Time &dt) {
-      circle_shape_.move(1, 0);
+      circle_shape_.move(5, 0);
     }}
     // [/WASD control callbacks.]
   } {
@@ -72,6 +73,8 @@ void Player::Update(const sf::Time &dt) {
   angle = psy::utils::math::rad_to_deg(angle);  // Converts to degrees.
   //circle_shape_.setRotation(angle);
   circle_shape_.setRotation(angle);
+
+  circle_shape_.setFillColor(psy::utils::PsychoColor(color_clock_.getElapsedTime()));
 }
 
 }  // namespace entities

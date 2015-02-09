@@ -30,6 +30,8 @@ class Player : public engine::Body {
  private:
   sf::CircleShape circle_shape_;
   KeyboardMap key_pressed_controls_;
+  // Clock used for color calculation
+  sf::Clock color_clock_;
 };
 
 }  // namespace entities
