@@ -41,7 +41,7 @@ Player::Player(float x, float y) :
     }}
     // [/WASD control callbacks.]
   },
-  pattern_(static_cast<psy::utils::ColorFunctionRaw>(psy::utils::PsychoColor)) {
+  pattern_(psy::utils::ColorChanger(sf::Color::Magenta, 100.)) {
 
   // Initializes all the separate drawable entities.
   circle_shape_.setFillColor(pattern_.CurrentColor());

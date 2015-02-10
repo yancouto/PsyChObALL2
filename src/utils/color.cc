@@ -12,6 +12,7 @@ sf::Color PsychoColor(const sf::Time &time, sf::Uint8 alpha) {
   int t = time.asMilliseconds() % cycle_time;
   double r, g, b;
   const double ct = cycle_time; // much less text
+  // Just a bunch of if's
   if (t <= cycle_time / 3) {
     r = 100.;                  // 100%
     g = 100. * t / (ct / 3.);  // 0 -> 100%
@@ -63,6 +64,21 @@ sf::Color TrigoColor(const sf::Time &time, sf::Uint8 alpha) {
 
 sf::Color TrigoColor(const sf::Time &time) {
   return TrigoColor(time, 255);
+}
+
+ColorFunction ColorChanger(sf::Color initial, double speedPerSec) {
+  int cycle_time = 512000. / speedPerSec;
+  return [initial, cycle_time] (const sf::Time &time, sf::Uint8 alpha) {
+    double t = static_cast<double>(time.asMilliseconds() % cycle_time) / cycle_time;
+    int r = initial.r + t * 512,
+        g = initial.g + t * 512,
+        b = initial.b + t * 512;
+    r %= 512; g %= 512; b %= 512;
+    if (r >= 256) r = 511 - r;
+    if (g >= 256) g = 511 - g;
+    if (b >= 256) b = 511 - b;
+    return sf::Color(r, g, b, alpha);
+  };
 }
 
 ColorPattern::ColorPattern() {}
