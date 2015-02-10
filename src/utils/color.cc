@@ -65,5 +65,8 @@ sf::Color TrigoColor(const sf::Time &time) {
   return TrigoColor(time, 255);
 }
 
+ColorPattern::ColorPattern() {}
+ColorPattern::ColorPattern(ColorFunction func) : color_func_(func) {}
+
 }  // namespace utils
 }  // namespace psy

@@ -8,14 +8,14 @@
 #include <SFML/Window.hpp>
 
 #include <engine/body.h>
+#include <utils/color.h>
 
 namespace psy {
 namespace entities {
 
 class Player : public engine::Body {
  public:
-  typedef std::map<sf::Keyboard::Key, 
-                   std::function<void (const sf::Time &dt)>> KeyboardMap;
+  using KeyboardMap = std::map<sf::Keyboard::Key, std::function<void (const sf::Time&)>>;
 
   Player(float x, float y);
   explicit Player(const sf::Vector2f &position);
@@ -30,8 +30,8 @@ class Player : public engine::Body {
  private:
   sf::CircleShape circle_shape_;
   KeyboardMap key_pressed_controls_;
-  // Clock used for color calculation
-  sf::Clock color_clock_;
+  // Color calculation
+  psy::utils::ColorPattern pattern_;
 };
 
 }  // namespace entities

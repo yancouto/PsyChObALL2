@@ -6,7 +6,6 @@
 #include <SFML/System.hpp>
 
 #include <system/globals.h>
-#include <utils/color.h>
 #include <utils/math.h>
 
 namespace psy {
@@ -31,12 +30,21 @@ Player::Player(float x, float y) :
     }},
     {Key::D, [this](const sf::Time &dt) {
       circle_shape_.move(5, 0);
+    }},
+    {Key::Q, [this](const sf::Time &dt) {
+      // Repeats itself a lot, but screw it, it's just a test
+      pattern_.set_color_func(static_cast<psy::utils::ColorFunctionRaw>(psy::utils::PsychoColor));
+    }},
+    {Key::E, [this](const sf::Time &dt) {
+      // Just a test
+      pattern_.set_color_func(static_cast<psy::utils::ColorFunctionRaw>(psy::utils::TrigoColor));
     }}
     // [/WASD control callbacks.]
-  } {
+  },
+  pattern_(static_cast<psy::utils::ColorFunctionRaw>(psy::utils::PsychoColor)) {
 
-  // Intiializes all the separate drawable entities.
-  circle_shape_.setFillColor(psy::utils::TrigoColor(color_clock_.getElapsedTime()));
+  // Initializes all the separate drawable entities.
+  circle_shape_.setFillColor(pattern_.CurrentColor());
   float r = circle_shape_.getRadius();
   circle_shape_.setOrigin(r, r);
   circle_shape_.setPosition(x, y);
@@ -70,7 +78,7 @@ void Player::Update(const sf::Time &dt) {
   //circle_shape_.setRotation(angle);
   circle_shape_.setRotation(angle);
 
-  circle_shape_.setFillColor(psy::utils::TrigoColor(color_clock_.getElapsedTime()));
+  circle_shape_.setFillColor(pattern_.CurrentColor());
 }
 
 }  // namespace entities

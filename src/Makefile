@@ -102,7 +102,7 @@ body_test.o: engine/body_test.cc body.o
 # // Engine related compilations.
 # Menu related compilations. //
 
-main_menu.o: menu/main_menu.cc menu/main_menu.h engine/task.h engine/state.h entities/player.h system/manager.h
+main_menu.o: menu/main_menu.cc menu/main_menu.h engine/task.h engine/state.h entities/player.h utils/color.h system/globals.h system/manager.h
 	$(CC) $< $(CFLAGS)
 
 main_menu_test.o: menu/main_menu_test.cc main_menu.o
