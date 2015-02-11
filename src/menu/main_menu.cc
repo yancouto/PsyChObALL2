@@ -9,11 +9,9 @@ namespace psy {
 namespace menu {
 namespace {
 
-std::shared_ptr<psy::engine::State> menu = nullptr;
-std::shared_ptr<psy::entities::Player> player = nullptr;
 int fps_counter = 1;
 
-void CreateMenu() {
+engine::State *CreateMenu() {
   engine::State *m = new engine::State;  // New menu
 
   // Sets up and adds to the state a dummy task for testing.
@@ -43,10 +41,10 @@ void CreateMenu() {
     puts("State has lost focus.");
   }); 
 
-  menu.reset(m);
+  return m;
 }
 
-void CreatePlayer() {
+entities::Player *CreatePlayer() {
   entities::Player *p = new entities::Player(400.f, 300.f);
 
   auto current_state = MainMenuState();
@@ -55,19 +53,19 @@ void CreatePlayer() {
   });
   current_state->AddTask(player_update);
   
-  player.reset(p);
+  return p;
 }
 
 
 }  // unnamed namespace
 
 std::shared_ptr<psy::engine::State> MainMenuState() {
-  if (!menu) CreateMenu();
+  static const std::shared_ptr<engine::State> menu(CreateMenu());
   return menu;
 }
 
 std::shared_ptr<psy::entities::Player> Player() {
-  if (!player) CreatePlayer();
+  static const std::shared_ptr<entities::Player> player(CreatePlayer());
   return player;
 }
 

@@ -29,3 +29,6 @@ src/test
 
 # GCC pre-compiled headers
 *.gch
+
+#Resources
+src/assets/

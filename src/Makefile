@@ -29,9 +29,9 @@ else
 endif
 
 # All non-test files (except main)
-DEPS=manager.o state.o task.o main_menu.o body.o player.o globals.o math.o color.o
+DEPS=manager.o state.o task.o main_menu.o body.o player.o globals.o math.o color.o splash_screen.o
 # Tests
-TESTS=manager_test.o state_test.o task_test.o main_menu_test.o body_test.o player_test.o globals_test.o math_test.o color_test.o
+TESTS=manager_test.o state_test.o task_test.o main_menu_test.o body_test.o player_test.o globals_test.o math_test.o color_test.o splash_screen_test.o
 
 # Adding a file instructions:
 # When you add a file, be sure to add its .o to DEPS
@@ -60,7 +60,7 @@ gtest_main.o:
 
 # Root related compilations. //
 
-main.o: main.cc system/manager.h menu/main_menu.h
+main.o: main.cc system/manager.h menu/main_menu.h menu/splash_screen.h engine/state.h entities/player.h engine/task.h engine/body.h utils/color.h
 	$(CC) $< $(CFLAGS)
 
 # // Root related compilations.
@@ -106,6 +106,12 @@ main_menu.o: menu/main_menu.cc menu/main_menu.h engine/task.h engine/state.h ent
 	$(CC) $< $(CFLAGS)
 
 main_menu_test.o: menu/main_menu_test.cc main_menu.o
+	$(CC) $< $(GFLAGS)
+
+splash_screen.o: menu/splash_screen.cc menu/splash_screen.h engine/state.h engine/task.h system/manager.h entities/player.h menu/main_menu.h engine/body.h utils/color.h
+	$(CC) $< $(CFLAGS)
+
+splash_screen_test.o: menu/splash_screen_test.cc splash_screen.o
 	$(CC) $< $(GFLAGS)
 
 # // Menu related compilations.
