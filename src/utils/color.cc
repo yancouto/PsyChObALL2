@@ -52,6 +52,8 @@ sf::Color PsychoColor(const sf::Time &time) {
   return PsychoColor(time, 255);
 }
 
+const ColorFunction kPsychoColorFunction = ColorFunction(static_cast<ColorFunctionRaw>(PsychoColor));
+
 sf::Color TrigoColor(const sf::Time &time, sf::Uint8 alpha) {
   static int cycle_time = 10000;
   using psy::utils::math::kPi;
@@ -65,6 +67,8 @@ sf::Color TrigoColor(const sf::Time &time, sf::Uint8 alpha) {
 sf::Color TrigoColor(const sf::Time &time) {
   return TrigoColor(time, 255);
 }
+
+const ColorFunction kTrigoColorFunction = ColorFunction(static_cast<ColorFunctionRaw>(TrigoColor));
 
 ColorFunction ColorChanger(sf::Color initial, double speedPerSec) {
   int cycle_time = 512000. / speedPerSec;

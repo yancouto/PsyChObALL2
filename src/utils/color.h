@@ -15,10 +15,12 @@ using ColorFunction = std::function<sf::Color (const sf::Time&, sf::Uint8)>;
 // Same color transition as used in PsyChObALL
 sf::Color PsychoColor(const sf::Time &time);
 sf::Color PsychoColor(const sf::Time &time, sf::Uint8 alpha);
+extern const ColorFunction kPsychoColorFunction;
 
 // Color transition using sins
 sf::Color TrigoColor(const sf::Time &time);
 sf::Color TrigoColor(const sf::Time &time, sf::Uint8 alpha);
+extern const ColorFunction kTrigoColorFunction;
 
 // Takes initial color and "moves it"
 ColorFunction ColorChanger(sf::Color initial, double speedPerSec);
@@ -26,8 +28,7 @@ ColorFunction ColorChanger(sf::Color initial, double speedPerSec);
 // Used to make color changing easier
 // Example use:
 //   using namespace psy::utils
-//   // Need this weird cast because of function overloads
-//   ColorPattern pattern(static_cast<ColorFunctionRaw>(PsychoColor));
+//   ColorPattern pattern(kPsychoColorFunction);
 //   ...
 //   // No need to deal with clock and time stuff
 //   something.setFillColor(pattern.CurrentColor());
@@ -49,6 +50,7 @@ class ColorPattern {
   ColorFunction color_func_;
   // Internal Clock to deal with time.
   sf::Clock clock_;
+  // TODO: Make delaying possible
 };
 
 }  // namespace utils

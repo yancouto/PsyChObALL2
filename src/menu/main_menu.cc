@@ -4,15 +4,26 @@
 
 #include <engine/task.h>
 #include <system/manager.h>
+#include <utils/color.h>
 
 namespace psy {
 namespace menu {
 namespace {
 
 int fps_counter = 1;
+sf::Font nevis;
+sf::Text text;
+utils::ColorPattern pattern(utils::kPsychoColorFunction);
 
 engine::State *CreateMenu() {
   engine::State *m = new engine::State;  // New menu
+
+  // Font stuff
+  nevis.loadFromFile("assets/fonts/nevis.ttf");
+  text.setFont(nevis);
+  text.setString("PsyChObALL 2222");
+  text.setColor(pattern.CurrentColor());
+  text.setPosition(10, 5);
 
   // Sets up and adds to the state a dummy task for testing.
   engine::Task hello_world([](const sf::Time &dt) {
@@ -29,6 +40,8 @@ engine::State *CreateMenu() {
   // Sets up State Rendering callback.
   m->set_render_callback([](sf::RenderWindow &canvas) {
     canvas.draw(*(psy::menu::Player()));
+    text.setColor(pattern.CurrentColor());
+    canvas.draw(text);
   });
 
   // Sets up the Focus callback. When the state is to become active.

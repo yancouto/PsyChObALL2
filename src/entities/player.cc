@@ -33,11 +33,11 @@ Player::Player(float x, float y) :
     }},
     {Key::Q, [this](const sf::Time &dt) {
       // Repeats itself a lot, but screw it, it's just a test
-      pattern_.set_color_func(static_cast<psy::utils::ColorFunctionRaw>(psy::utils::PsychoColor));
+      pattern_.set_color_func(psy::utils::kPsychoColorFunction);
     }},
     {Key::E, [this](const sf::Time &dt) {
       // Just a test
-      pattern_.set_color_func(static_cast<psy::utils::ColorFunctionRaw>(psy::utils::TrigoColor));
+      pattern_.set_color_func(psy::utils::kTrigoColorFunction);
     }}
     // [/WASD control callbacks.]
   },
