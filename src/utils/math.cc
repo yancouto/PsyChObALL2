@@ -10,11 +10,11 @@ namespace math {
 const double kPi = M_PI;
 
 int RadToDeg(double radians) {
-  return (360 * radians) / (2 * kPi);
+  return (180 * radians) / kPi;
 }
 
 double DegToRad(int degrees) {
-  return (2. * kPi * degrees) / 360.;
+  return (kPi * degrees) / 180.;
 }
 
 }  // namespace math
