@@ -13,7 +13,7 @@ namespace {
 int fps_counter = 1;
 sf::Font nevis;
 sf::Text text;
-utils::ColorPattern pattern(utils::kPsychoColorFunction);
+utils::ColorPattern pattern;
 
 engine::State *CreateMenu() {
   engine::State *m = new engine::State;  // New menu

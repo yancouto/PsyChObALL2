@@ -1,6 +1,7 @@
 #include <utils/color.h>
 
 #include <cmath>
+#include <cassert>
 
 #include <utils/math.h>
 
@@ -52,7 +53,9 @@ sf::Color PsychoColor(const sf::Time &time) {
   return PsychoColor(time, 255);
 }
 
-const ColorFunction kPsychoColorFunction = ColorFunction(static_cast<ColorFunctionRaw>(PsychoColor));
+ColorFunctionRaw PsychoColorFunction() { 
+  return static_cast<ColorFunctionRaw>(PsychoColor);
+}
 
 sf::Color TrigoColor(const sf::Time &time, sf::Uint8 alpha) {
   static int cycle_time = 10000;
@@ -68,7 +71,9 @@ sf::Color TrigoColor(const sf::Time &time) {
   return TrigoColor(time, 255);
 }
 
-const ColorFunction kTrigoColorFunction = ColorFunction(static_cast<ColorFunctionRaw>(TrigoColor));
+ColorFunctionRaw TrigoColorFunction() {
+  return static_cast<ColorFunctionRaw>(TrigoColor);
+}
 
 ColorFunction ColorChanger(sf::Color initial, double speedPerSec) {
   int cycle_time = 512000. / speedPerSec;
@@ -85,7 +90,7 @@ ColorFunction ColorChanger(sf::Color initial, double speedPerSec) {
   };
 }
 
-ColorPattern::ColorPattern() {}
+ColorPattern::ColorPattern() : color_func_(PsychoColorFunction()) {}
 ColorPattern::ColorPattern(ColorFunction func) : color_func_(func) {}
 
 }  // namespace utils
