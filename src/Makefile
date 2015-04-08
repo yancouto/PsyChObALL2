@@ -1,8 +1,12 @@
 CC=g++
 # Assumes SFML folder is in the same directory as psycho's
 SFML_PATH=../SFML-2.2
-CFLAGS=-I$(SFML_PATH)/include/ -I. -c -Wall -std=gnu++11
-LDFLAGS=-L$(SFML_PATH)/lib/ -lsfml-graphics -lsfml-window -lsfml-audio -lsfml-system -lm
+
+# TMXLoader folder
+TMXLOADER_PATH = ../tmxloader
+
+CFLAGS=-I$(SFML_PATH)/include/ -I$(TMXLOADER_PATH)/include/ -I. -c -Wall -std=gnu++11 -Wunused-function
+LDFLAGS=-L$(SFML_PATH)/lib/ -L$(TMXLOADER_PATH)/lib/ -lsfml-graphics -lsfml-window -lsfml-audio -lsfml-system -lpugi -ltmx-loader -lz -lm
 DEBUG = false
 
 # Sets whether to use DEBUG or not.
@@ -66,14 +70,18 @@ main.o: main.cc system/manager.h menu/main_menu.h menu/splash_screen.h engine/st
 # // Root related compilations.
 # System related compilations. //
 
-manager.o: system/manager.cc system/manager.h
+manager.o: system/manager.cc manager.h
 	$(CC) $< $(CFLAGS)
+
+manager.h: system/manager.h
 
 manager_test.o: system/manager_test.cc manager.o
 	$(CC) $< $(GFLAGS)
 
-globals.o: system/globals.cc system/globals.h
+globals.o: system/globals.cc globals.h
 	$(CC) $< $(CFLAGS)
+
+globals.h: system/globals.h
 
 globals_test.o: system/globals_test.cc globals.o
 	$(CC) $< $(GFLAGS)
@@ -81,20 +89,26 @@ globals_test.o: system/globals_test.cc globals.o
 # // System related compilations.
 # Engine related compilations. //
 
-state.o: engine/state.cc engine/state.h engine/task.h
+state.o: engine/state.cc state.h
 	$(CC) $< $(CFLAGS)
+
+state.h: engine/state.h task.h
 
 state_test.o: engine/state_test.cc state.o
 	$(CC) $< $(GFLAGS)
 
-task.o: engine/task.cc engine/task.h
+task.o: engine/task.cc task.h
 	$(CC) $< $(CFLAGS)
+
+task.h: engine/task.h
 
 task_test.o: engine/task_test.cc task.o
 	$(CC) $< $(GFLAGS)
 
-body.o: engine/body.cc engine/body.h
+body.o: engine/body.cc body.h
 	$(CC) $< $(CFLAGS)
+
+body.h: engine/body.h
 
 body_test.o: engine/body_test.cc body.o
 	$(CC) $< $(GFLAGS)
@@ -102,14 +116,18 @@ body_test.o: engine/body_test.cc body.o
 # // Engine related compilations.
 # Menu related compilations. //
 
-main_menu.o: menu/main_menu.cc menu/main_menu.h engine/task.h engine/state.h entities/player.h utils/color.h system/globals.h system/manager.h
+main_menu.o: menu/main_menu.cc main_menu.h task.h color.h globals.h manager.h
 	$(CC) $< $(CFLAGS)
+
+main_menu.h: state.h player.h menu/main_menu.h
 
 main_menu_test.o: menu/main_menu_test.cc main_menu.o
 	$(CC) $< $(GFLAGS)
 
-splash_screen.o: menu/splash_screen.cc menu/splash_screen.h engine/state.h engine/task.h system/manager.h entities/player.h menu/main_menu.h engine/body.h utils/color.h
+splash_screen.o: menu/splash_screen.cc splash_screen.h task.h manager.h main_menu.h
 	$(CC) $< $(CFLAGS)
+
+splash_screen.h: state.h menu/splash_screen.h
 
 splash_screen_test.o: menu/splash_screen_test.cc splash_screen.o
 	$(CC) $< $(GFLAGS)
@@ -117,8 +135,10 @@ splash_screen_test.o: menu/splash_screen_test.cc splash_screen.o
 # // Menu related compilations.
 # Entities related compilations.
 
-player.o: entities/player.cc entities/player.h engine/body.h utils/math.h utils/color.h system/globals.h
+player.o: entities/player.cc math.h globals.h
 	$(CC) $< $(CFLAGS)
+
+player.h: body.h color.h entities/player.h
 
 player_test.o: entities/player_test.cc player.o
 	$(CC) $< $(GFLAGS)
@@ -126,14 +146,18 @@ player_test.o: entities/player_test.cc player.o
 # // Entities related compilations.
 # Utils related compilations.
 
-math.o: utils/math.cc utils/math.h
+math.o: utils/math.cc math.h
 	$(CC) $< $(CFLAGS)
+
+math.h: utils/math.h
 
 math_test.o: utils/math_test.cc math.o
 	$(CC) $< $(GFLAGS)
 
-color.o: utils/color.cc utils/color.h utils/math.h
+color.o: utils/color.cc color.h math.h
 	$(CC) $< $(CFLAGS)
+
+color.h: utils/color.h
 
 color_test.o: utils/color_test.cc color.o
 	$(CC) $< $(GFLAGS)

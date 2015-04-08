@@ -1,6 +1,10 @@
 #include <menu/main_menu.h>
 
+#include <memory>
+
 #include <SFML/Graphics.hpp>
+
+#include <tmx/MapLoader.h>
 
 #include <engine/task.h>
 #include <system/manager.h>
@@ -14,6 +18,7 @@ int fps_counter = 1;
 sf::Font nevis;
 sf::Text text;
 utils::ColorPattern pattern;
+std::unique_ptr<tmx::MapLoader> map;
 
 engine::State *CreateMenu() {
   engine::State *m = new engine::State;  // New menu
@@ -24,6 +29,10 @@ engine::State *CreateMenu() {
   text.setString("PsyChObALL 2222");
   text.setColor(pattern.CurrentColor());
   text.setPosition(10, 5);
+
+  // Map
+  map.reset(new tmx::MapLoader("assets/tilemaps"));
+  map->Load("test.tmx");
 
   // Sets up and adds to the state a dummy task for testing.
   engine::Task hello_world([](const sf::Time &dt) {
@@ -39,6 +48,7 @@ engine::State *CreateMenu() {
 
   // Sets up State Rendering callback.
   m->set_render_callback([](sf::RenderWindow &canvas) {
+    canvas.draw(*map);
     canvas.draw(*(psy::menu::Player()));
     text.setColor(pattern.CurrentColor());
     canvas.draw(text);

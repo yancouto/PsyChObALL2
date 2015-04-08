@@ -4,7 +4,7 @@
 #include <menu/main_menu.h>
 #include <menu/splash_screen.h>
 
-const bool skip_splash = false;
+const bool skip_splash = true;
 
 int main() {
   psy::system::Init();

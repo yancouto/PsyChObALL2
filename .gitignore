@@ -22,6 +22,9 @@ SFML-2.2/
 #Google Test Contents
 gtest-1.7.0/
 
+#TMX Tiled Support
+tmxloader/
+
 #Binary executables
 bin/
 src/psy2

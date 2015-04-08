@@ -15,7 +15,7 @@ typedef sf::Keyboard::Key Key;
 
 Player::Player(float x, float y) : 
   Body(x, y), 
-  circle_shape_(100.f, 3),
+  circle_shape_(50.f, 3),
   // Key pressed control map initialization.
   key_pressed_controls_ {
     // [WASD control callbacks.]
