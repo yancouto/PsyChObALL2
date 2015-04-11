@@ -5,7 +5,7 @@ SFML_PATH=../SFML-2.2
 # TMXLoader folder
 TMXLOADER_PATH = ../tmxloader
 
-CFLAGS=-I$(SFML_PATH)/include/ -I$(TMXLOADER_PATH)/include/ -I. -c -Wall -std=gnu++11 -Wunused-function
+CFLAGS=-I$(SFML_PATH)/include/ -I$(TMXLOADER_PATH)/include/ -I. -c -Wno-unused-function -Wall -std=gnu++11
 LDFLAGS=-L$(SFML_PATH)/lib/ -L$(TMXLOADER_PATH)/lib/ -lsfml-graphics -lsfml-window -lsfml-audio -lsfml-system -lpugi -ltmx-loader -lz -lm
 DEBUG = false
 
